@@ -1,17 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { translations, moduleSkills, aiIntelligenceLayers } from '../data/content';
 import { Language } from '../types';
-import { BookOpen, Headphones, PenTool, Mic, CheckCircle2, Sparkles, ArrowRight, Check, Zap } from 'lucide-react';
+import { Mic, CheckCircle2, Sparkles, ArrowRight, Check, Zap } from 'lucide-react';
 
 interface ModulesSectionProps {
   lang: Language;
   onOpenTestModal: () => void;
 }
-
-const MODULE_ICONS: Record<string, React.ReactNode> = {
-  reading: <BookOpen className="w-5 h-5" />, listening: <Headphones className="w-5 h-5" />,
-  writing: <PenTool className="w-5 h-5" />, speaking: <Mic className="w-5 h-5" />,
-};
 
 export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTestModal }) => {
   const t = translations[lang];
@@ -54,7 +49,6 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
     <section id="modules" ref={sectionRef} className="py-20 md:py-28 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold uppercase tracking-wider">
             <Zap className="w-3.5 h-3.5" /> IELTS & TOEIC Core
@@ -63,7 +57,6 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
           <p className="reveal text-slate-500 text-base" style={{ transitionDelay: '.14s' }}>{t.modules.subtitle}</p>
         </div>
 
-        {/* 4 Module tabs */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8 reveal stagger" style={{ transitionDelay: '.18s' }}>
           {moduleSkills.map(sk => {
             const isSel = selected === sk.id;
@@ -71,22 +64,25 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
               <button key={sk.id} onClick={() => { setSelected(sk.id); setAnimKey(k => k + 1); }}
                 className={`p-4 sm:p-5 rounded-2xl border text-left transition-all duration-250 cursor-pointer card-hover
                   ${isSel ? 'bg-slate-900 text-white border-slate-900 shadow-lg scale-[1.02]' : 'bg-slate-50 hover:bg-slate-100 text-slate-800 border-slate-200'}`}>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-sm" style={{ backgroundColor: sk.color }}>
-                    {MODULE_ICONS[sk.id]}
+                <div className="relative mb-3 overflow-hidden rounded-2xl aspect-[4/3]">
+                  <img src={sk.photo} alt={sk.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <div className={`absolute inset-0 ${isSel ? 'bg-slate-950/45' : 'bg-slate-950/35'}`} />
+                  <div className="absolute inset-x-0 bottom-0 p-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md ${isSel ? 'bg-white text-slate-900' : 'bg-white/90 text-slate-700'}`}>
+                        {sk.accuracy}
+                      </span>
+                      <span className="w-2 h-2 rounded-full bg-white/80" />
+                    </div>
+                    <h3 className="mt-2 font-extrabold text-base sm:text-lg text-white">{sk.title}</h3>
                   </div>
-                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md ${isSel ? 'bg-white/20 text-white' : 'bg-white border border-slate-200 text-emerald-600'}`}>
-                    {sk.accuracy}
-                  </span>
                 </div>
-                <h3 className="font-extrabold text-base sm:text-lg">{sk.title}</h3>
                 <p className={`text-xs mt-0.5 ${isSel ? 'text-slate-300' : 'text-slate-500'}`}>{sk.subtitle}</p>
               </button>
             );
           })}
         </div>
 
-        {/* Module detail + Sandbox */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
           <div key={`detail-${animKey}`} className="lg:col-span-5 bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden reveal-left"
             style={{ animation: 'slide-up .45s cubic-bezier(.16,1,.3,1)' }}>
@@ -125,7 +121,6 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
             </div>
           </div>
 
-          {/* Live sandbox */}
           <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 shadow-lg p-6 sm:p-8 reveal-right">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
               <div>
@@ -206,28 +201,31 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
           </div>
         </div>
 
-        {/* AI intelligence layer */}
-        <div className="p-7 sm:p-9 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl reveal" style={{ transitionDelay: '.2s' }}>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-5 mb-6">
+        <div className="p-7 sm:p-9 rounded-3xl bg-[#FFF7F1] border border-orange-100 shadow-xl reveal" style={{ transitionDelay: '.2s' }}>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-orange-100 pb-5 mb-6">
             <div>
-              <div className="flex items-center gap-2 text-orange-400 mb-1">
+              <div className="flex items-center gap-2 text-orange-600 mb-1">
                 <Zap className="w-4 h-4" />
-                <span className="text-xs font-bold uppercase tracking-wider font-mono">{t.modules.aiLayerTitle}</span>
+                <span className="text-xs font-bold uppercase tracking-wider font-mono">{lang === 'ru' ? 'Что студент получает на выходе' : 'What the learner gets back'}</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-white font-display">{lang === 'ru' ? '4 фундаментальные AI-возможности' : lang === 'kz' ? '4 іргелі AI-мүмкіндік' : '4 Core Algorithmic Capabilities'}</h3>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-display">{lang === 'ru' ? 'Четыре понятных результата без лишнего шума' : lang === 'kz' ? 'Артық шуусыз төрт нақты нәтиже' : 'Four clear outcomes, without extra noise'}</h3>
             </div>
-            <span className="px-3 py-1 bg-white/10 text-slate-300 rounded-full text-xs font-mono self-start">
-              {lang === 'ru' ? 'Универсальная ML-архитектура' : lang === 'kz' ? 'Әмбебап ML-архитектура' : 'Universal ML Architecture'}
+            <span className="px-3 py-1 bg-white text-slate-600 border border-orange-100 rounded-full text-xs font-mono self-start">
+              {lang === 'ru' ? 'Подано через реальные фото и интерфейс' : 'Presented through real photos and product UI'}
             </span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {aiIntelligenceLayers.map((layer, i) => (
-              <div key={layer.id} className="p-4 rounded-2xl bg-slate-800/60 border border-slate-700 hover:border-orange-500/60 transition-colors card-hover" style={{ transitionDelay: `${i * 0.06}s` }}>
-                <h4 className="font-bold text-sm text-white mb-1.5 flex items-center gap-2 font-display">
-                  <CheckCircle2 className="w-4 h-4 text-orange-400 shrink-0" />
-                  {lang === 'ru' ? layer.nameRu : lang === 'kz' ? layer.nameRu : layer.nameEn}
-                </h4>
-                <p className="text-xs text-slate-400 leading-relaxed">{lang === 'ru' ? layer.descRu : lang === 'kz' ? layer.descRu : layer.descEn}</p>
+              <div key={layer.id} className="p-4 rounded-2xl bg-white border border-orange-100 hover:border-orange-200 transition-colors card-hover shadow-sm" style={{ transitionDelay: `${i * 0.06}s` }}>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 rounded-xl brand-gradient text-white flex items-center justify-center font-black text-sm">
+                    {i + 1}
+                  </div>
+                  <h4 className="font-bold text-sm text-slate-900 font-display">
+                    {lang === 'ru' ? layer.nameRu : lang === 'kz' ? layer.nameRu : layer.nameEn}
+                  </h4>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed">{lang === 'ru' ? layer.descRu : lang === 'kz' ? layer.descRu : layer.descEn}</p>
               </div>
             ))}
           </div>
