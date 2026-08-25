@@ -369,13 +369,15 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ lang, onOp
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-                <button
-                  onClick={onOpenTestModal}
+                <a
+                  href="https://testtop.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-white text-slate-900 font-black px-7 py-3.5 rounded-xl flex items-center gap-2 hover:bg-orange-50 transition-all active:scale-95 shadow-lg"
                 >
                   {lang === 'ru' ? 'Пройти AI-диагностику' : 'Take AI Diagnostic'}
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </a>
                 <div className="flex items-center gap-2 text-white/80 text-sm justify-center">
                   <CheckCircle2 className="w-4 h-4 text-yellow-300 shrink-0" />
                   {lang === 'ru' ? 'Без кредитной карты' : 'No credit card needed'}

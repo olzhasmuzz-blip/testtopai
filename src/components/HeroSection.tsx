@@ -151,12 +151,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
 
             {/* CTAs */}
             <div className="reveal flex flex-col sm:flex-row items-stretch sm:items-center gap-3" style={{ transitionDelay: '.2s' }}>
-              <button onClick={onOpenTestModal}
+              <a href="https://testtop.app/" target="_blank" rel="noopener noreferrer"
                 className="group px-7 py-4 rounded-xl brand-gradient text-white font-bold text-sm flex items-center justify-center gap-2.5 brand-glow transition-all hover:scale-[1.03] active:scale-[0.98] neon-pulse">
                 <Sparkles className="w-4 h-4" />
                 {t.hero.ctaPrimary}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
               <a href="#modules"
                 className="px-7 py-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-900 font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-all hover:border-orange-300">
                 <Play className="w-4 h-4 text-orange-500 fill-orange-500" />
@@ -257,12 +257,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
                         { label: 'Writing', acc: '95%', color: 'from-blue-500 to-cyan-600', Icon: PenTool },
                         { label: 'Speaking', acc: '90%', color: 'from-amber-400 to-orange-500', Icon: Mic },
                       ].map(({ label, acc, color, Icon }, i) => (
-                        <button key={i} onClick={onOpenTestModal}
+                        <a key={i} href="https://testtop.app/" target="_blank" rel="noopener noreferrer"
                           className={`p-3 rounded-2xl bg-gradient-to-br ${color} text-white flex flex-col items-center gap-1 hover:scale-[1.03] transition-transform cursor-pointer`}>
                           <Icon className="w-5 h-5 opacity-90" />
                           <span className="font-black text-sm font-display">{label}</span>
                           <span className="text-[9px] opacity-80 font-mono">{acc} Accuracy</span>
-                        </button>
+                        </a>
                       ))}
                     </div>
 

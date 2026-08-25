@@ -78,12 +78,12 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenTestModal }
             <Globe className="w-3.5 h-3.5 text-slate-400" />
             <span className="uppercase tracking-wider font-mono">{lang}</span>
           </button>
-          <button onClick={onOpenTestModal}
-            className="flex items-center gap-2 px-5 py-2 text-xs font-bold text-white brand-gradient rounded-xl brand-glow neon-pulse transition-all hover:scale-[1.03] active:scale-[0.98] cursor-pointer">
+          <a href="https://testtop.app/" target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2 text-xs font-bold text-white brand-gradient rounded-xl brand-glow neon-pulse transition-all hover:scale-[1.03] active:scale-[0.98]">
             <Sparkles className="w-3.5 h-3.5" />
             <span>{t.nav.startFree}</span>
             <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+          </a>
         </div>
 
         {/* Mobile trigger */}
@@ -108,11 +108,12 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenTestModal }
               </a>
             ))}
           </div>
-          <button onClick={() => { setMobileMenuOpen(false); onOpenTestModal(); }}
+          <a href="https://testtop.app/" target="_blank" rel="noopener noreferrer"
+            onClick={() => setMobileMenuOpen(false)}
             className="w-full mt-3 py-3 px-4 text-center text-sm font-bold text-white brand-gradient rounded-xl flex items-center justify-center gap-2 brand-glow">
             <Sparkles className="w-4 h-4" />
             {t.nav.startFree}
-          </button>
+          </a>
         </div>
       )}
     </header>

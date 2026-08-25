@@ -217,14 +217,16 @@ export const StudentShowcaseSection: React.FC<StudentShowcaseSectionProps> = ({ 
             </div>
 
             {/* CTA */}
-            <button
-              onClick={onOpenTestModal}
+            <a
+              href="https://testtop.app/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full brand-gradient text-white font-black py-4 px-6 rounded-2xl flex items-center justify-center gap-2 brand-glow hover:opacity-90 transition-all active:scale-95"
             >
               <Play className="w-4 h-4 fill-white" />
               {lang === 'ru' ? 'Попробовать бесплатно' : 'Try for Free'}
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
 
           {/* Right panel — big phone mockup */}
