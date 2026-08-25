@@ -1,0 +1,345 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { translations } from '../data/content';
+import { Language } from '../types';
+import {
+  AlertTriangle, DollarSign, BookOpen, Clock,
+  MicOff, WifiOff, Quote, CheckCircle2, XCircle,
+  TrendingDown, Calculator, ChevronLeft, ChevronRight,
+} from 'lucide-react';
+
+interface ProblemSectionProps {
+  lang: Language;
+}
+
+const PROBLEM_PHOTOS: Record<string, string> = {
+  tutors:   'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80',
+  static:   'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&auto=format&fit=crop&q=80',
+  feedback: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&auto=format&fit=crop&q=80',
+  eval:     'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=800&auto=format&fit=crop&q=80',
+  offline:  'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80',
+};
+
+const SEVERITY_COLORS: Record<number, string> = {
+  95: '#EF4444',
+  90: '#F97316',
+  85: '#F59E0B',
+  80: '#EAB308',
+  75: '#84CC16',
+};
+
+const getSeverityColor = (s: number) => {
+  const keys = Object.keys(SEVERITY_COLORS).map(Number).sort((a, b) => b - a);
+  for (const k of keys) { if (s >= k) return SEVERITY_COLORS[k]; }
+  return '#84CC16';
+};
+
+export const ProblemSection: React.FC<ProblemSectionProps> = ({ lang }) => {
+  const t = translations[lang];
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [mode, setMode] = useState<'cards' | 'calc'>('cards');
+  const [tutorHours, setTutorHours] = useState(30);
+  const [hourlyRate, setHourlyRate] = useState(40);
+  const [animKey, setAnimKey] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const items = t.problem.items;
+  const active = items[activeIdx];
+
+  const solutionMap: Record<string, { ai: string; savings: string }> = {
+    tutors:   { ai: lang === 'ru' ? 'AI-тренер 24/7 за $10-20/мес с безлимитными проверками.' : 'AI coach 24/7 for $10-20/mo with unlimited practice loops.', savings: lang === 'ru' ? 'Экономия до 90%' : 'Up to 90% cost saved' },
+    static:   { ai: lang === 'ru' ? 'Динамическая генерация заданий под уровень от Band 5.0 до 9.0.' : 'Dynamic tasks tuned precisely to candidate CEFR level.', savings: lang === 'ru' ? '100% адаптивный план' : '100% adaptive path' },
+    feedback: { ai: lang === 'ru' ? 'Мгновенная проверка эссе за 2 секунды с разбором каждого слова.' : 'Instant 2-second essay evaluation with line-by-line fixes.', savings: lang === 'ru' ? 'В 100× быстрее' : '100× faster feedback' },
+    eval:     { ai: lang === 'ru' ? 'Беспристрастный AI-аудит по 4 официальным критериям Cambridge.' : 'Unbiased neural rubric across all 4 Cambridge criteria.', savings: lang === 'ru' ? '95% точность' : '95% band accuracy' },
+    offline:  { ai: lang === 'ru' ? 'Практика в браузере или на смартфоне в любой точке планеты.' : 'Practice anywhere on mobile or desktop globally.', savings: lang === 'ru' ? 'Доступ 24/7/365' : '24/7 global access' },
+  };
+
+  const iconMap: Record<string, React.ReactNode> = {
+    tutors:   <DollarSign className="w-5 h-5" />,
+    static:   <BookOpen className="w-5 h-5" />,
+    feedback: <Clock className="w-5 h-5" />,
+    eval:     <MicOff className="w-5 h-5" />,
+    offline:  <WifiOff className="w-5 h-5" />,
+  };
+
+  const totalLegacy = tutorHours * hourlyRate;
+  const testTopCost = 40;
+  const savings = Math.max(0, totalLegacy - testTopCost);
+  const pct = Math.round((savings / (totalLegacy || 1)) * 100);
+
+  /* scroll-reveal */
+  useEffect(() => {
+    const els = sectionRef.current?.querySelectorAll('.reveal,.reveal-left,.reveal-right') ?? [];
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    els.forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  const goTo = (i: number) => {
+    setActiveIdx(i);
+    setAnimKey(k => k + 1);
+  };
+  const prev = () => goTo((activeIdx - 1 + items.length) % items.length);
+  const next = () => goTo((activeIdx + 1) % items.length);
+
+  return (
+    <section id="problem" ref={sectionRef} className="py-20 md:py-28 bg-white relative overflow-hidden">
+
+      {/* faint bg shape */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(239,68,68,0.04) 0%, transparent 70%)' }} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* ── Header ── */}
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold uppercase tracking-wider">
+            <AlertTriangle className="w-3.5 h-3.5" />
+            {t.problem.sectionTag}
+          </div>
+          <h2 className="reveal text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight font-display" style={{ transitionDelay: '.08s' }}>
+            {lang === 'ru'
+              ? <>Подготовка к экзаменам <span className="text-rose-500">критически устарела</span></>
+              : <>Global exam prep is <span className="text-rose-500">fundamentally broken</span></>}
+          </h2>
+          <p className="reveal text-slate-500 text-base leading-relaxed" style={{ transitionDelay: '.14s' }}>
+            {t.problem.subtitle}
+          </p>
+        </div>
+
+        {/* ── Mode toggle ── */}
+        <div className="reveal flex justify-center mb-10" style={{ transitionDelay: '.18s' }}>
+          <div className="inline-flex bg-slate-100 p-1 rounded-2xl border border-slate-200">
+            <button onClick={() => setMode('cards')}
+              className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${mode === 'cards' ? 'bg-white shadow text-slate-900' : 'text-slate-500 hover:text-slate-800'}`}>
+              {lang === 'ru' ? '5 проблем рынка' : '5 Market Pain Points'}
+            </button>
+            <button onClick={() => setMode('calc')}
+              className={`px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-1.5 transition-all ${mode === 'calc' ? 'bg-indigo-600 text-white shadow' : 'text-slate-500 hover:text-slate-800'}`}>
+              <Calculator className="w-4 h-4" />
+              {lang === 'ru' ? 'Калькулятор экономии' : 'Savings Calculator'}
+            </button>
+          </div>
+        </div>
+
+        {/* ── CARDS MODE ── */}
+        {mode === 'cards' && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            {/* Left — big photo card */}
+            <div className="lg:col-span-5 reveal-left">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[420px] group">
+                <img
+                  key={animKey}
+                  src={PROBLEM_PHOTOS[active.id]}
+                  alt={active.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  style={{ animation: 'slide-up .5s cubic-bezier(.16,1,.3,1)' }}
+                  referrerPolicy="no-referrer"
+                />
+                {/* dark overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+
+                {/* severity badge */}
+                <div className="absolute top-4 right-4">
+                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-xl px-3 py-2 border border-white/20">
+                    <span className="text-xs font-mono font-bold text-white">Pain Level</span>
+                    <div className="w-16 h-2 rounded-full bg-white/20 overflow-hidden">
+                      <div className="h-full rounded-full bar-fill"
+                        style={{ width: `${active.severity}%`, backgroundColor: getSeverityColor(active.severity) }} />
+                    </div>
+                    <span className="text-xs font-black text-white font-mono">{active.severity}%</span>
+                  </div>
+                </div>
+
+                {/* bottom content */}
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-2 py-0.5 rounded-md bg-rose-500/80 text-white text-[10px] font-bold font-mono uppercase">
+                      {active.flaw}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-black text-white font-display leading-tight">{active.title}</h3>
+                  <p className="text-sm text-slate-300 mt-1 leading-relaxed">{active.description}</p>
+
+                  {/* ai solution strip */}
+                  <div className="mt-4 p-3 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs text-emerald-200">{solutionMap[active.id]?.ai}</p>
+                      <span className="text-[10px] font-bold text-emerald-400 font-mono">{solutionMap[active.id]?.savings}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* nav arrows */}
+                <button onClick={prev}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all">
+                  <ChevronLeft className="w-4 h-4 text-white" />
+                </button>
+                <button onClick={next}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all">
+                  <ChevronRight className="w-4 h-4 text-white" />
+                </button>
+
+                {/* dots */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                  {items.map((_, i) => (
+                    <button key={i} onClick={() => goTo(i)}
+                      className={`rounded-full transition-all ${i === activeIdx ? 'w-5 h-2 bg-white' : 'w-2 h-2 bg-white/40'}`} />
+                  ))}
+                </div>
+              </div>
+
+              {/* quote */}
+              <div className="mt-6 p-5 rounded-2xl bg-indigo-50 border-l-4 border-indigo-600">
+                <Quote className="w-7 h-7 text-indigo-300 mb-2" />
+                <p className="text-slate-800 font-bold text-sm italic leading-snug">{t.problem.quote}</p>
+                <div className="flex items-center gap-1.5 mt-2 text-xs text-indigo-600 font-bold font-mono">
+                  <TrendingDown className="w-3.5 h-3.5" />
+                  Legacy EdTech Bottleneck · 2026
+                </div>
+              </div>
+            </div>
+
+            {/* Right — stacked problem cards */}
+            <div className="lg:col-span-7 space-y-3 reveal-right">
+              {items.map((item, i) => {
+                const isActive = i === activeIdx;
+                const color = getSeverityColor(item.severity);
+                return (
+                  <button key={item.id} onClick={() => goTo(i)} className="w-full text-left">
+                    <div className={`relative p-4 sm:p-5 rounded-2xl border transition-all duration-300 overflow-hidden cursor-pointer card-hover
+                      ${isActive
+                        ? 'bg-slate-900 border-slate-700 shadow-xl text-white'
+                        : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-800'}`}
+                      style={{ transitionDelay: `${i * 0.05}s` }}>
+
+                      {/* active glow bar */}
+                      {isActive && (
+                        <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl" style={{ backgroundColor: color }} />
+                      )}
+
+                      <div className="flex items-start gap-4">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all
+                          ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'bg-white border border-slate-200 text-slate-600'}`}>
+                          {iconMap[item.id]}
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-2 mb-1">
+                            <span className="font-extrabold text-sm sm:text-base">{item.title}</span>
+                            <span className={`px-2 py-0.5 text-[10px] font-bold rounded-md uppercase font-mono
+                              ${isActive ? 'bg-white/10 text-slate-300' : 'bg-slate-200 text-slate-600'}`}>
+                              {item.flaw}
+                            </span>
+                          </div>
+                          <p className={`text-xs leading-relaxed ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
+                            {item.description}
+                          </p>
+
+                          {/* severity bar */}
+                          <div className="flex items-center gap-2 mt-2">
+                            <div className="flex-1 h-1.5 rounded-full bg-slate-200/50 overflow-hidden">
+                              <div className="h-full rounded-full transition-all duration-700"
+                                style={{ width: `${item.severity}%`, backgroundColor: color, opacity: isActive ? 1 : 0.5 }} />
+                            </div>
+                            <span className={`text-[10px] font-mono font-bold ${isActive ? 'text-slate-300' : 'text-slate-400'}`}>
+                              {item.severity}%
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* X / Check icon */}
+                        <div className="shrink-0 mt-0.5">
+                          {isActive
+                            ? <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                            : <XCircle className="w-5 h-5 text-rose-400/60" />}
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── CALCULATOR MODE ── */}
+        {mode === 'calc' && (
+          <div className="max-w-3xl mx-auto reveal slide-up">
+            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 space-y-8 shadow-sm">
+              <div>
+                <h3 className="text-xl font-black text-slate-900 font-display">
+                  {lang === 'ru' ? 'Калькулятор личной экономии' : 'Personal ROI Calculator'}
+                </h3>
+                <p className="text-xs text-slate-500 mt-1 font-mono">
+                  {lang === 'ru' ? 'Сравните стоимость репетиторов с TestTop AI' : 'Compare private tutor costs vs TestTop AI'}
+                </p>
+              </div>
+
+              {/* Slider 1 */}
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm font-bold">
+                  <span className="text-slate-700">{lang === 'ru' ? 'Часов подготовки:' : 'Prep hours needed:'}</span>
+                  <span className="text-indigo-600 font-mono">{tutorHours} {lang === 'ru' ? 'ч' : 'hrs'}</span>
+                </div>
+                <input type="range" min={10} max={80} step={5} value={tutorHours}
+                  onChange={e => setTutorHours(+e.target.value)}
+                  className="w-full h-2 rounded-full appearance-none cursor-pointer accent-indigo-600 bg-slate-200" />
+                <div className="flex justify-between text-[10px] text-slate-400 font-mono">
+                  <span>10 (Sprint)</span><span>40 (Average)</span><span>80 (Intensive)</span>
+                </div>
+              </div>
+
+              {/* Slider 2 */}
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm font-bold">
+                  <span className="text-slate-700">{lang === 'ru' ? 'Ставка репетитора:' : 'Tutor rate / hr:'}</span>
+                  <span className="text-indigo-600 font-mono">${hourlyRate}/hr</span>
+                </div>
+                <input type="range" min={20} max={100} step={5} value={hourlyRate}
+                  onChange={e => setHourlyRate(+e.target.value)}
+                  className="w-full h-2 rounded-full appearance-none cursor-pointer accent-indigo-600 bg-slate-200" />
+                <div className="flex justify-between text-[10px] text-slate-400 font-mono">
+                  <span>$20 Novice</span><span>$50 Standard</span><span>$100 Ex-examiner</span>
+                </div>
+              </div>
+
+              {/* Result */}
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                  <span className="text-[10px] text-slate-500 font-mono block mb-1">
+                    {lang === 'ru' ? 'Репетитор' : 'Private Tutor'}
+                  </span>
+                  <span className="text-2xl font-black text-rose-500 font-display">${totalLegacy}</span>
+                </div>
+                <div className="p-4 rounded-2xl bg-indigo-50 border border-indigo-200 shadow-sm">
+                  <span className="text-[10px] text-indigo-600 font-mono block mb-1">TestTop Pro (2 мес)</span>
+                  <span className="text-2xl font-black text-indigo-600 font-display">${testTopCost}</span>
+                </div>
+                <div className="p-4 rounded-2xl bg-emerald-500 border border-emerald-600 shadow-sm">
+                  <span className="text-[10px] text-emerald-100 font-mono block mb-1">
+                    {lang === 'ru' ? 'Экономия' : 'You Save'}
+                  </span>
+                  <span className="text-2xl font-black text-white font-display">${savings}</span>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-900 text-white flex items-center justify-between">
+                <span className="text-sm font-bold">{lang === 'ru' ? 'Вы экономите' : 'Total savings'}</span>
+                <div className="flex items-center gap-3">
+                  <div className="w-32 h-3 rounded-full bg-slate-700 overflow-hidden">
+                    <div className="h-full rounded-full bg-emerald-400 bar-fill" style={{ width: `${pct}%` }} />
+                  </div>
+                  <span className="text-lg font-black text-emerald-400 font-mono">{pct}%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};

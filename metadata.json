@@ -1,0 +1,6 @@
+{
+  "name": "TestTop AI - Global Exam Training Platform",
+  "description": "Next-generation AI-powered exam preparation landing page inspired by goprep.gg and ielts.gg across 10 interactive sections with live test simulation.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
