@@ -10,6 +10,7 @@ interface ModulesSectionProps {
 
 export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTestModal }) => {
   const t = translations[lang];
+  const MODULES_VISUAL = '/illustrations/modules-dashboard.svg';
   const [selected, setSelected] = useState<'reading' | 'listening' | 'writing' | 'speaking'>('writing');
   const [essay, setEssay] = useState('In recent years, artificial intelligence has become increasingly prominent in education. While some argue it undermines human tutors, I firmly believe AI enhances personalized learning.');
   const [analyzing, setAnalyzing] = useState(false);
@@ -52,10 +53,14 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold uppercase tracking-wider">
-            <Zap className="w-3.5 h-3.5" /> IELTS & TOEIC Core
+            <Zap className="w-3.5 h-3.5" /> {lang === 'ru' ? 'Как выглядит обучение внутри' : 'How learning looks inside'}
           </div>
           <h2 className="reveal text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display" style={{ transitionDelay: '.08s' }}>{t.modules.title}</h2>
-          <p className="reveal text-slate-500 text-base" style={{ transitionDelay: '.14s' }}>{t.modules.subtitle}</p>
+          <p className="reveal text-slate-500 text-base" style={{ transitionDelay: '.14s' }}>
+            {lang === 'ru'
+              ? 'Каждый модуль показывает, что делать студенту дальше, а не просто демонстрирует интерфейс.'
+              : t.modules.subtitle}
+          </p>
         </div>
 
         {/* 4 Module tabs */}
@@ -66,17 +71,21 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
               <button key={sk.id} onClick={() => { setSelected(sk.id); setAnimKey(k => k + 1); }}
                 className={`p-4 sm:p-5 rounded-2xl border text-left transition-all duration-250 cursor-pointer card-hover
                   ${isSel ? 'bg-slate-900 text-white border-slate-900 shadow-lg scale-[1.02]' : 'bg-slate-50 hover:bg-slate-100 text-slate-800 border-slate-200'}`}>
-                <div className="relative mb-3 overflow-hidden rounded-2xl aspect-[4/3]">
-                  <img src={sk.photo} alt={sk.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                  <div className={`absolute inset-0 ${isSel ? 'bg-slate-950/45' : 'bg-slate-950/35'}`} />
-                  <div className="absolute inset-x-0 bottom-0 p-3">
+                <div className="relative mb-3 overflow-hidden rounded-2xl aspect-[4/3] brand-gradient">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.2),transparent_40%)]" />
+                  <div className="absolute inset-0 p-3 flex flex-col justify-between">
                     <div className="flex items-center justify-between gap-2">
                       <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md ${isSel ? 'bg-white text-slate-900' : 'bg-white/90 text-slate-700'}`}>
                         {sk.accuracy}
                       </span>
                       <span className="w-2 h-2 rounded-full bg-white/80" />
                     </div>
-                    <h3 className="mt-2 font-extrabold text-base sm:text-lg text-white">{sk.title}</h3>
+                    <div>
+                      <div className="w-12 h-12 rounded-2xl bg-white/15 border border-white/20 backdrop-blur flex items-center justify-center text-white font-black text-sm">
+                        {sk.title.slice(0, 2).toUpperCase()}
+                      </div>
+                      <h3 className="mt-2 font-extrabold text-base sm:text-lg text-white">{sk.title}</h3>
+                    </div>
                   </div>
                 </div>
                 <p className={`text-xs mt-0.5 ${isSel ? 'text-slate-300' : 'text-slate-500'}`}>{sk.subtitle}</p>
@@ -89,20 +98,20 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
           <div key={`detail-${animKey}`} className="lg:col-span-5 bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden reveal-left"
             style={{ animation: 'slide-up .45s cubic-bezier(.16,1,.3,1)' }}>
-            <div className="relative h-44 overflow-hidden">
-              <img src={skill.photo} alt={skill.title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" referrerPolicy="no-referrer" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+            <div className="relative h-44 overflow-hidden bg-[#FFF7F1]">
+              <img src={MODULES_VISUAL} alt="" className="w-full h-full object-contain p-4" referrerPolicy="no-referrer" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#FFF7F1] via-transparent to-transparent" />
               <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
                 <div>
-                  <h3 className="text-lg font-black text-white font-display">{skill.title} Master Engine</h3>
-                  <p className="text-xs text-slate-300">{skill.sampleTitle}</p>
+                  <h3 className="text-lg font-black text-slate-900 font-display">{skill.title} Master Engine</h3>
+                  <p className="text-xs text-slate-500">{skill.sampleTitle}</p>
                 </div>
-                <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold text-white border border-white/30 bg-white/10 backdrop-blur">{skill.accuracy}</span>
+                <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold text-slate-900 border border-orange-100 bg-white/90 backdrop-blur">{skill.accuracy}</span>
               </div>
             </div>
             <div className="p-6 space-y-4">
               <p className="text-xs text-slate-400 font-mono uppercase tracking-wider font-bold">
-                {lang === 'ru' ? 'Официальная спецификация модуля IELTS' : lang === 'kz' ? 'IELTS модулінің ресми сипаттамасы' : 'Official IELTS Module Specification'}
+                {lang === 'ru' ? 'Что получает студент внутри модуля' : lang === 'kz' ? 'IELTS модулінің ресми сипаттамасы' : 'What the learner gets inside the module'}
               </p>
               <div className="space-y-2.5">
                 {skill.capabilities.map((cap, i) => (
@@ -213,10 +222,10 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
                 <Zap className="w-4 h-4" />
                 <span className="text-xs font-bold uppercase tracking-wider font-mono">{lang === 'ru' ? 'Что студент получает на выходе' : 'What the learner gets back'}</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-display">{lang === 'ru' ? 'Четыре понятных результата без лишнего шума' : lang === 'kz' ? 'Артық шуусыз төрт нақты нәтиже' : 'Four clear outcomes, without extra noise'}</h3>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-display">{lang === 'ru' ? 'Четыре понятных результата для ученика' : lang === 'kz' ? 'Артық шуусыз төрт нақты нәтиже' : 'Four clear outcomes for the learner'}</h3>
             </div>
             <span className="px-3 py-1 bg-white text-slate-600 border border-orange-100 rounded-full text-xs font-mono self-start">
-              {lang === 'ru' ? 'Подано через реальные фото и интерфейс' : 'Presented through real photos and product UI'}
+              {lang === 'ru' ? 'Подано через иллюстрации и живой интерфейс' : 'Presented through illustrations and product UI'}
             </span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

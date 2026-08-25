@@ -15,12 +15,7 @@ const TYPEWRITER_PHRASES = [
   'TOEIC 990/990',
 ];
 
-const HERO_PHOTOS = [
-  'https://info.writetheworld.org/hs-fs/hubfs/images/20250415_1319_Focused%20Student%20Writing_simple_compose_01jrxhnc0hfbpbgxyqdexbyfzt.png?height=606&name=20250415_1319_Focused+Student+Writing_simple_compose_01jrxhnc0hfbpbgxyqdexbyfzt.png&width=909',
-  'https://www.magdeburg-studium.de/onlinemagazin_media/Beitragsfotos/2024/Studentin%2Barbeitet%2Bin%2Bder%2BBibliothek%2Bam%2BLaptop%2B%28c%29%2BJana%2BD%C3%BCnnhaupt%2BUni%2BMagdeburg-height-560-width-1000.jpg',
-  'https://www.emma.nl/sites/www.emma.nl/files/2021-08/vrouw-studeren-laptop-closeup.jpg',
-  'https://inscription.una.bj/build/assets/focus-f6461e2e.jpg',
-];
+const HERO_ILLUSTRATION = '/illustrations/hero-learning.svg';
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
   const t = translations[lang];
@@ -106,12 +101,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
             <div className="reveal grid grid-cols-1 sm:grid-cols-3 gap-3" style={{ transitionDelay: '.15s' }}>
               {t.hero.pills.map((pill, i) => (
                 <div key={i} className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm card-hover overflow-hidden">
-                  <img
-                    src={HERO_PHOTOS[i + 1] || HERO_PHOTOS[0]}
-                    alt=""
-                    className="w-full h-24 rounded-xl object-cover mb-3"
-                    referrerPolicy="no-referrer"
-                  />
+                  <div className="w-full h-24 rounded-xl mb-3 brand-gradient opacity-90 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.22),transparent_45%)]" />
+                    <div className="absolute left-3 top-3 w-8 h-8 rounded-xl bg-white/20 backdrop-blur border border-white/20" />
+                    <div className="absolute right-3 bottom-3 w-12 h-2 rounded-full bg-white/30" />
+                  </div>
                   <h4 className="font-extrabold text-sm text-slate-900">{pill.title}</h4>
                   <p className="text-xs text-slate-500 mt-1 leading-relaxed">{pill.desc}</p>
                 </div>
@@ -139,14 +133,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
 
             <div className="reveal flex items-center gap-3 text-xs text-slate-500" style={{ transitionDelay: '.25s' }}>
               <div className="flex -space-x-2">
-                {HERO_PHOTOS.map((src, i) => (
-                  <img
+                {['AI', 'XP', '24/7'].map((label, i) => (
+                  <div
                     key={i}
-                    src={src}
-                    alt=""
-                    className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
-                    referrerPolicy="no-referrer"
-                  />
+                    className="w-8 h-8 rounded-full border-2 border-white shadow-sm brand-gradient text-white flex items-center justify-center text-[10px] font-black"
+                  >
+                    {label}
+                  </div>
                 ))}
               </div>
               <div className="flex items-center gap-1.5 font-semibold text-slate-700">
@@ -162,15 +155,43 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
 
             <div className="relative w-full max-w-[420px]">
               <div className="grid grid-cols-12 gap-3">
-                <div className="col-span-8 rounded-[28px] overflow-hidden shadow-2xl border border-slate-100 bg-white">
-                  <img src={HERO_PHOTOS[0]} alt="" className="w-full h-[360px] object-cover" referrerPolicy="no-referrer" />
+                <div className="col-span-8 rounded-[28px] overflow-hidden shadow-2xl border border-slate-100 bg-white p-3">
+                  <div className="relative rounded-[22px] overflow-hidden bg-[#FFF7F1]">
+                    <img src={HERO_ILLUSTRATION} alt="" className="w-full h-[360px] object-contain p-3" referrerPolicy="no-referrer" />
+                    <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur border border-orange-100 text-[10px] font-bold text-slate-700 shadow-sm">
+                      Real learning flow
+                    </div>
+                  </div>
                 </div>
                 <div className="col-span-4 space-y-3">
-                  <div className="rounded-[24px] overflow-hidden shadow-lg border border-slate-100 bg-white">
-                    <img src={HERO_PHOTOS[1]} alt="" className="w-full h-[170px] object-cover" referrerPolicy="no-referrer" />
+                  <div className="rounded-[24px] shadow-lg border border-slate-100 bg-white p-4 h-[170px] flex flex-col justify-between">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400 font-mono">
+                        {lang === 'ru' ? 'Что получает студент' : 'What a learner gets'}
+                      </p>
+                      <h3 className="text-base font-black text-slate-900 font-display mt-2">
+                        {lang === 'ru' ? 'Понятный маршрут к баллу' : 'A clear path to a higher score'}
+                      </h3>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-2 rounded-full bg-orange-100 overflow-hidden">
+                        <div className="h-full w-[86%] rounded-full brand-gradient" />
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        {lang === 'ru'
+                          ? 'Диагностика, практика, фидбек и повторение в одном непрерывном цикле.'
+                          : 'Diagnostic, practice, feedback and repetition in one continuous loop.'}
+                      </p>
+                    </div>
                   </div>
-                  <div className="rounded-[24px] overflow-hidden shadow-lg border border-slate-100 bg-white">
-                    <img src={HERO_PHOTOS[2]} alt="" className="w-full h-[170px] object-cover" referrerPolicy="no-referrer" />
+                  <div className="rounded-[24px] shadow-lg border border-slate-100 bg-slate-900 p-4 h-[170px] flex flex-col justify-between text-white">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400 font-mono">
+                        {lang === 'ru' ? 'Результат' : 'Outcome'}
+                      </span>
+                      <span className="px-2 py-1 rounded-full bg-white/10 border border-white/10 text-[10px] font-bold">+1.0</span>
+                    </div>
+                    <img src={HERO_ILLUSTRATION} alt="" className="w-full h-24 object-contain opacity-90" referrerPolicy="no-referrer" />
                   </div>
                 </div>
                 <div className="col-span-12 rounded-[28px] overflow-hidden shadow-xl border border-slate-100 bg-white">
@@ -185,8 +206,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
                           : 'We show real study moments instead of abstract tech visuals.'}
                       </p>
                     </div>
-                    <div className="col-span-2 rounded-2xl overflow-hidden">
-                      <img src={HERO_PHOTOS[3]} alt="" className="w-full h-24 object-cover" referrerPolicy="no-referrer" />
+                    <div className="col-span-2 rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 p-2">
+                      <div className="w-full h-24 rounded-xl brand-gradient relative overflow-hidden">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.2),transparent_40%)]" />
+                        <div className="absolute inset-0 flex items-center justify-center text-white text-xs font-black uppercase tracking-[0.2em]">
+                          AI · IELTS · TOEIC
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -194,12 +220,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
 
               <div className="absolute -left-5 top-8 hidden sm:block animate-float-slow">
                 <div className="bg-white/95 backdrop-blur rounded-3xl shadow-xl border border-orange-100 p-2 w-36">
-                  <img src={HERO_PHOTOS[0]} alt="" className="w-full h-28 rounded-2xl object-cover" referrerPolicy="no-referrer" />
+                  <img src={HERO_ILLUSTRATION} alt="" className="w-full h-28 rounded-2xl object-contain bg-[#FFF7F1]" referrerPolicy="no-referrer" />
                 </div>
               </div>
               <div className="absolute -right-6 bottom-8 hidden sm:block animate-float-med">
                 <div className="bg-white/95 backdrop-blur rounded-3xl shadow-xl border border-orange-100 p-2 w-40">
-                  <img src={HERO_PHOTOS[1]} alt="" className="w-full h-32 rounded-2xl object-cover" referrerPolicy="no-referrer" />
+                  <div className="w-full h-32 rounded-2xl brand-gradient text-white flex items-center justify-center font-black">
+                    {lang === 'ru' ? 'Путь без шума' : 'No visual noise'}
+                  </div>
                 </div>
               </div>
             </div>

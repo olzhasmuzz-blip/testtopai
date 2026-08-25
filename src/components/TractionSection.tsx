@@ -20,20 +20,19 @@ function useCounter(target: number, running: boolean, duration = 1400) {
     const step = target / (duration / 16);
     const id = setInterval(() => {
       start += step;
-      if (start >= target) { setVal(target); clearInterval(id); }
-      else setVal(Math.floor(start));
+      if (start >= target) {
+        setVal(target);
+        clearInterval(id);
+      } else {
+        setVal(Math.floor(start));
+      }
     }, 16);
     return () => clearInterval(id);
-  }, [running, target]);
+  }, [running, target, duration]);
   return val;
 }
 
-const TRACTION_PHOTOS = [
-  'https://info.writetheworld.org/hs-fs/hubfs/images/20250415_1319_Focused%20Student%20Writing_simple_compose_01jrxhnc0hfbpbgxyqdexbyfzt.png?height=606&name=20250415_1319_Focused+Student+Writing_simple_compose_01jrxhnc0hfbpbgxyqdexbyfzt.png&width=909',
-  'https://www.magdeburg-studium.de/onlinemagazin_media/Beitragsfotos/2024/Studentin%2Barbeitet%2Bin%2Bder%2BBibliothek%2Bam%2BLaptop%2B%28c%29%2BJana%2BD%C3%BCnnhaupt%2BUni%2BMagdeburg-height-560-width-1000.jpg',
-  'https://www.emma.nl/sites/www.emma.nl/files/2021-08/vrouw-studeren-laptop-closeup.jpg',
-  'https://inscription.una.bj/build/assets/focus-f6461e2e.jpg',
-];
+const TRACTION_VISUAL = '/illustrations/traction-students.svg';
 
 export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
   const t = translations[lang];
@@ -49,14 +48,18 @@ export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
   }, []);
 
   useEffect(() => {
-    const io = new IntersectionObserver(entries =>
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 },
+    );
     sectionRef.current?.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
     return () => io.disconnect();
   }, []);
 
   useEffect(() => {
-    const io = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setCounting(true); }, { threshold: 0.4 });
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setCounting(true);
+    }, { threshold: 0.4 });
     if (countersRef.current) io.observe(countersRef.current);
     return () => io.disconnect();
   }, []);
@@ -76,50 +79,70 @@ export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
 
   return (
     <section id="traction" ref={sectionRef} className="py-20 md:py-28 bg-[#FCFBF8] relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none opacity-[0.35]"
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.35]"
         style={{
           backgroundImage:
             'linear-gradient(rgba(15,23,42,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.03) 1px, transparent 1px)',
           backgroundSize: '44px 44px',
-        }} />
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold uppercase tracking-wider">
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            {t.traction.sectionTag}
+            {lang === 'ru' ? 'Результаты, которые видит студент' : t.traction.sectionTag}
           </div>
           <h2 className="reveal text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display" style={{ transitionDelay: '.08s' }}>
             {t.traction.title}
           </h2>
           <p className="reveal text-slate-500 text-base" style={{ transitionDelay: '.14s' }}>
-            {t.traction.subtitle}
+            {lang === 'ru'
+              ? 'Показываем прогресс, уверенность и понятный пользовательский эффект без повторяющихся картинок.'
+              : t.traction.subtitle}
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-12 reveal stagger" style={{ transitionDelay: '.18s' }}>
-          {TRACTION_PHOTOS.map((src, i) => (
-            <div key={i} className="rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm">
-              <img src={src} alt="" className="w-full h-40 object-cover" referrerPolicy="no-referrer" />
-              <div className="p-4">
-                <p className="text-xs uppercase tracking-wider text-slate-400 font-mono font-bold">
-                  {lang === 'ru' ? 'Живая подготовка' : 'Real study moment'}
-                </p>
-                <p className="text-sm font-semibold text-slate-800 mt-1 leading-snug">
-                  {lang === 'ru'
-                    ? 'Учебная сцена без стерильного визуального шума'
-                    : 'A study scene without sterile visual noise'}
-                </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12 reveal stagger" style={{ transitionDelay: '.18s' }}>
+          <div className="lg:col-span-5 rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm">
+            <img src={TRACTION_VISUAL} alt="" className="w-full h-full max-h-[360px] object-contain bg-[#FFF7F1] p-4" referrerPolicy="no-referrer" />
+          </div>
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              {
+                title: lang === 'ru' ? 'Быстрый старт' : 'Fast start',
+                desc: lang === 'ru' ? 'Пользователь понимает, что делать в первый же день.' : 'The learner knows what to do on day one.',
+              },
+              {
+                title: lang === 'ru' ? 'Понятный прогресс' : 'Visible progress',
+                desc: lang === 'ru' ? 'Рост балла и закрытие слабых тем видны сразу.' : 'Score growth and skill gaps are visible immediately.',
+              },
+              {
+                title: lang === 'ru' ? 'Меньше шума' : 'Less clutter',
+                desc: lang === 'ru' ? 'Визуал поддерживает смысл, а не отвлекает от него.' : 'Visuals support the message instead of distracting.',
+              },
+              {
+                title: lang === 'ru' ? 'Больше уверенности' : 'More confidence',
+                desc: lang === 'ru' ? 'Студент видит понятный результат своих действий.' : 'The learner can see the effect of each action.',
+              },
+            ].map((card, i) => (
+              <div key={i} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div className="w-full h-32 rounded-2xl brand-gradient mb-4 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.2),transparent_35%)]" />
+                </div>
+                <p className="text-xs uppercase tracking-wider text-slate-400 font-mono font-bold">{card.title}</p>
+                <p className="text-sm font-semibold text-slate-800 mt-1 leading-snug">{card.desc}</p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         <div ref={countersRef} className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12 reveal stagger" style={{ transitionDelay: '.2s' }}>
           {tractionMetrics.map((m, i) => (
             <div key={i} className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm text-left card-hover overflow-hidden">
-              <div className="h-24 rounded-2xl overflow-hidden mb-4">
-                <img src={TRACTION_PHOTOS[i % TRACTION_PHOTOS.length]} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              <div className="h-24 rounded-2xl overflow-hidden mb-4 brand-gradient relative">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.25),transparent_35%)]" />
               </div>
               <div className="text-3xl sm:text-4xl font-black text-slate-900 font-display font-mono" style={{ fontVariantNumeric: 'tabular-nums' }}>
                 {i === 0 ? `${counts[i].toLocaleString()}${suffixes[i]}` : `${counts[i]}${suffixes[i]}`}
@@ -175,7 +198,7 @@ export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
                 <span className="w-2 h-2 rounded-full bg-emerald-400" />Live Student Network
               </span>
               <h3 className="text-xl sm:text-2xl font-extrabold font-display text-slate-900">
-                {lang === 'ru' ? 'Истории успеха выпускников TestTop' : 'Verified Candidate Admissions'}
+                {lang === 'ru' ? 'Что чувствует пользователь после первого цикла' : 'Verified Candidate Admissions'}
               </h3>
             </div>
             <div className="bg-slate-50 border border-slate-200 px-4 py-2 rounded-2xl flex items-center gap-2 text-xs font-mono shrink-0 max-w-sm">
@@ -188,8 +211,11 @@ export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
             {visibleTestimonials.map((item, i) => (
-              <div key={`${tIdx}-${i}`} className="bg-[#FCFBF8] p-5 rounded-2xl border border-slate-200 hover:border-orange-200 transition-colors flex flex-col justify-between card-hover"
-                style={{ animation: 'slide-up .4s cubic-bezier(.16,1,.3,1)', animationDelay: `${i * 80}ms`, animationFillMode: 'both' }}>
+              <div
+                key={`${tIdx}-${i}`}
+                className="bg-[#FCFBF8] p-5 rounded-2xl border border-slate-200 hover:border-orange-200 transition-colors flex flex-col justify-between card-hover"
+                style={{ animation: 'slide-up .4s cubic-bezier(.16,1,.3,1)', animationDelay: `${i * 80}ms`, animationFillMode: 'both' }}
+              >
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="px-2.5 py-1 bg-emerald-500/10 text-emerald-700 rounded-lg text-xs font-bold font-mono">{item.score}</span>
@@ -199,7 +225,9 @@ export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
                       </span>
                     )}
                   </div>
-                  <div className="flex gap-0.5 mb-2">{[...Array(5)].map((_, j) => <Star key={j} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />)}</div>
+                  <div className="flex gap-0.5 mb-2">
+                    {[...Array(5)].map((_, j) => <Star key={j} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />)}
+                  </div>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed italic mb-4">“{item.comment}”</p>
                 </div>
                 <div className="flex items-center gap-3 pt-3 border-t border-slate-200">

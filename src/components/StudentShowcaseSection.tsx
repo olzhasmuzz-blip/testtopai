@@ -66,29 +66,7 @@ const SCREENSHOTS = [
   },
 ];
 
-const STORY_PHOTOS = [
-  {
-    src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&auto=format&fit=crop&q=80',
-    titleRu: 'Живая подготовка',
-    titleEn: 'Real study session',
-    descRu: 'Студент не смотрит на абстрактную схему, а учится на реальных заданиях и экранах.',
-    descEn: 'A real learner works through actual exam tasks and product screens.',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80',
-    titleRu: 'Разбор на ходу',
-    titleEn: 'On-the-go review',
-    descRu: 'Проверка эссе и заметки прямо в телефоне, без лишнего интерфейсного шума.',
-    descEn: 'Essay review and notes on mobile, without unnecessary interface noise.',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1531498860502-7c67cf02f657?w=900&auto=format&fit=crop&q=80',
-    titleRu: 'Сцена из аудитории',
-    titleEn: 'In the classroom',
-    descRu: 'Более человеческий, учебный контекст вместо стерильного AI-рендера.',
-    descEn: 'A human learning context instead of a sterile AI render.',
-  },
-];
+const SHOWCASE_ILLUSTRATION = '/illustrations/hero-learning.svg';
 
 export const StudentShowcaseSection: React.FC<StudentShowcaseSectionProps> = ({ lang, onOpenTestModal }) => {
   const [active, setActive] = useState(0);
@@ -135,65 +113,56 @@ export const StudentShowcaseSection: React.FC<StudentShowcaseSectionProps> = ({ 
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-4 relative z-10">
           <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold uppercase tracking-wider">
             <span className="w-2 h-2 rounded-full bg-orange-500" />
-            {lang === 'ru' ? 'Живой продукт' : 'Live product'}
+            {lang === 'ru' ? 'Что видит студент' : 'What the student sees'}
           </div>
           <h2 className="reveal text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display" style={{ transitionDelay: '.08s' }}>
             {lang === 'ru'
-              ? <>Больше реальных сцен,<br /><span className="brand-gradient-text">меньше декоративного шума</span></>
-              : <>More real scenes,<br /><span className="brand-gradient-text">less decorative noise</span></>
+              ? <>Путь к баллу,<br /><span className="brand-gradient-text">понятный студенту</span></>
+              : <>A score path,<br /><span className="brand-gradient-text">that feels clear</span></>
             }
           </h2>
           <p className="reveal text-slate-500 text-base leading-relaxed" style={{ transitionDelay: '.14s' }}>
             {lang === 'ru'
-              ? 'Мы оставили интерфейс только там, где он помогает, и добавили больше живых фото, чтобы секция ощущалась как настоящий образовательный продукт.'
-              : 'We keep the UI only where it helps and add more real photos so the section feels like a genuine learning product.'}
+              ? 'Здесь важен не декор, а ответ на вопрос: что именно делает продукт для ученика и как он ведёт к росту балла.'
+              : 'This section answers one question: what the product does for the learner and how it moves the score up.'}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start relative z-10">
           <div className="lg:col-span-5 space-y-6 reveal-left">
-            <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 sm:col-span-7 rounded-[28px] overflow-hidden shadow-2xl border border-slate-100 bg-slate-100">
-                <img
-                  src={STORY_PHOTOS[0].src}
-                  alt={lang === 'ru' ? STORY_PHOTOS[0].titleRu : STORY_PHOTOS[0].titleEn}
-                  className="w-full h-[300px] object-cover"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="p-5 bg-white">
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <h3 className="text-lg font-black text-slate-900 font-display">
-                        {lang === 'ru' ? STORY_PHOTOS[0].titleRu : STORY_PHOTOS[0].titleEn}
-                      </h3>
-                      <p className="text-sm text-slate-500 mt-1 leading-relaxed">
-                        {lang === 'ru' ? STORY_PHOTOS[0].descRu : STORY_PHOTOS[0].descEn}
-                      </p>
-                    </div>
-                    <span className="shrink-0 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-[10px] font-bold uppercase tracking-wider">
-                      24/7
-                    </span>
-                  </div>
+            <div className="rounded-[28px] overflow-hidden shadow-2xl border border-slate-100 bg-[#FFF7F1]">
+              <div className="p-5 border-b border-orange-100 flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-black text-slate-900 font-display">
+                    {lang === 'ru' ? 'Что получает студент' : 'What the learner gets'}
+                  </h3>
+                  <p className="text-sm text-slate-500 mt-1 leading-relaxed">
+                    {lang === 'ru'
+                      ? 'Диагностика, понятный маршрут и обратная связь в одном месте.'
+                      : 'Diagnostic, clear path and feedback in one place.'}
+                  </p>
                 </div>
+                <span className="shrink-0 px-3 py-1 rounded-full bg-white border border-orange-100 text-orange-700 text-[10px] font-bold uppercase tracking-wider">
+                  24/7
+                </span>
               </div>
-
-              <div className="col-span-12 sm:col-span-5 space-y-4">
-                {STORY_PHOTOS.slice(1).map((photo, i) => (
-                  <div key={photo.src} className="rounded-[24px] overflow-hidden border border-slate-100 shadow-lg bg-white">
-                    <img
-                      src={photo.src}
-                      alt={lang === 'ru' ? photo.titleRu : photo.titleEn}
-                      className="w-full h-[142px] object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="p-4">
-                      <h4 className="text-sm font-extrabold text-slate-900 font-display">
-                        {lang === 'ru' ? photo.titleRu : photo.titleEn}
-                      </h4>
-                      <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                        {lang === 'ru' ? photo.descRu : photo.descEn}
-                      </p>
-                    </div>
+              <img
+                src={SHOWCASE_ILLUSTRATION}
+                alt=""
+                className="w-full h-[320px] object-contain p-5"
+                referrerPolicy="no-referrer"
+              />
+              <div className="grid grid-cols-3 gap-3 p-5 pt-0">
+                {[
+                  { ru: 'С чего начать', en: 'Where to start' },
+                  { ru: 'Что исправить', en: 'What to fix' },
+                  { ru: 'Как расти дальше', en: 'How to grow' },
+                ].map((item, i) => (
+                  <div key={i} className="rounded-2xl border border-orange-100 bg-white p-4 shadow-sm">
+                    <div className="w-2 h-2 rounded-full bg-orange-500 mb-3" />
+                    <p className="text-sm font-semibold text-slate-800 leading-tight">
+                      {lang === 'ru' ? item.ru : item.en}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -201,9 +170,9 @@ export const StudentShowcaseSection: React.FC<StudentShowcaseSectionProps> = ({ 
 
             <div className="grid grid-cols-3 gap-3">
               {[
-                lang === 'ru' ? 'Реальные задания' : 'Real tasks',
-                lang === 'ru' ? 'Живой прогресс' : 'Visible progress',
-                lang === 'ru' ? 'Понятный фидбек' : 'Clear feedback',
+                lang === 'ru' ? 'Понятный старт' : 'Clear start',
+                lang === 'ru' ? 'Меньше лишнего' : 'Less clutter',
+                lang === 'ru' ? 'Польза сразу' : 'Immediate value',
               ].map((item, i) => (
                 <div key={i} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                   <div className="w-2 h-2 rounded-full bg-orange-500 mb-3" />
@@ -219,8 +188,8 @@ export const StudentShowcaseSection: React.FC<StudentShowcaseSectionProps> = ({ 
                 </p>
                 <p className="text-sm text-slate-600 mt-1 leading-relaxed">
                   {lang === 'ru'
-                    ? 'Показываем не абстракцию, а среду, в которой студент реально готовится каждый день.'
-                    : 'We show the real environment where students actually study every day.'}
+                    ? 'Показываем не красивую декорацию, а понятный результат для студента: что делать, где ошибся и куда двигаться дальше.'
+                    : 'We show the result for the learner: what to do, where mistakes happen, and how to move forward.'}
                 </p>
               </div>
               <a

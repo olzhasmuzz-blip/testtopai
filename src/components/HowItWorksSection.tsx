@@ -12,9 +12,9 @@ interface HowItWorksSectionProps {
 const STEPS_RU = [
   {
     num: '01',
-    title: 'Проходишь бесплатную диагностику',
-    desc: 'За 5 минут AI анализирует твой уровень по всем 4 навыкам и находит конкретные слабые зоны.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.25.jpeg',
+    title: 'Быстро понимаешь свой стартовый уровень',
+    desc: 'За 5 минут AI показывает, где теряются баллы и с чего лучше начать именно тебе.',
+    screenshot: '/illustrations/diagnostic.svg',
     tag: 'Старт',
     tagColor: 'bg-orange-100 text-orange-700',
     accent: '#F97316',
@@ -22,9 +22,9 @@ const STEPS_RU = [
   },
   {
     num: '02',
-    title: 'Тренируешься по персональному плану',
-    desc: 'Reading, Listening, Writing и Speaking — реальные задания экзамена с мгновенной проверкой ответов.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.28.jpeg',
+    title: 'Практикуешь только то, что влияет на балл',
+    desc: 'Reading, Listening, Writing и Speaking идут в одном плане, без лишних отвлечений.',
+    screenshot: '/illustrations/practice.svg',
     tag: 'Практика',
     tagColor: 'bg-rose-100 text-rose-700',
     accent: '#F43F5E',
@@ -32,9 +32,9 @@ const STEPS_RU = [
   },
   {
     num: '03',
-    title: 'Получаешь мгновенный AI-фидбек',
-    desc: 'Каждый ответ разбирается по критериям: зелёный — верно, красный — ошибка с объяснением.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.34.jpeg',
+    title: 'Сразу видишь, что исправить',
+    desc: 'AI подсвечивает ошибки, показывает правильную формулировку и объясняет, почему так лучше.',
+    screenshot: '/illustrations/feedback.svg',
     tag: 'Фидбек',
     tagColor: 'bg-amber-100 text-amber-700',
     accent: '#FBBF24',
@@ -42,9 +42,9 @@ const STEPS_RU = [
   },
   {
     num: '04',
-    title: 'Растёшь — балл увеличивается',
-    desc: 'Система отслеживает прогресс, усложняет задания и ведёт тебя к целевому баллу шаг за шагом.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.42.jpeg',
+    title: 'Закрепляешь результат и растёшь в балле',
+    desc: 'Система подстраивает сложность, напоминает слабые темы и ведёт к целевому результату.',
+    screenshot: '/illustrations/growth.svg',
     tag: 'Результат',
     tagColor: 'bg-emerald-100 text-emerald-700',
     accent: '#10B981',
@@ -55,9 +55,9 @@ const STEPS_RU = [
 const STEPS_EN = [
   {
     num: '01',
-    title: 'Take your free AI diagnostic',
-    desc: 'In 5 minutes, AI evaluates all 4 skills and pinpoints exactly where you lose points.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.25.jpeg',
+    title: 'See your starting level fast',
+    desc: 'In 5 minutes, AI shows where you lose points and what to fix first.',
+    screenshot: '/illustrations/diagnostic.svg',
     tag: 'Start',
     tagColor: 'bg-orange-100 text-orange-700',
     accent: '#F97316',
@@ -65,9 +65,9 @@ const STEPS_EN = [
   },
   {
     num: '02',
-    title: 'Practice with your personal plan',
-    desc: 'Reading, Listening, Writing & Speaking — authentic exam tasks with instant answer checking.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.28.jpeg',
+    title: 'Practice what moves the score',
+    desc: 'Reading, Listening, Writing & Speaking in one focused study path.',
+    screenshot: '/illustrations/practice.svg',
     tag: 'Practice',
     tagColor: 'bg-rose-100 text-rose-700',
     accent: '#F43F5E',
@@ -75,9 +75,9 @@ const STEPS_EN = [
   },
   {
     num: '03',
-    title: 'Get instant AI feedback',
-    desc: 'Every answer is graded by criteria — green for correct, red for wrong with a clear explanation.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.34.jpeg',
+    title: 'See what to fix instantly',
+    desc: 'AI highlights mistakes, explains the correction and shows a better version.',
+    screenshot: '/illustrations/feedback.svg',
     tag: 'Feedback',
     tagColor: 'bg-amber-100 text-amber-700',
     accent: '#FBBF24',
@@ -85,9 +85,9 @@ const STEPS_EN = [
   },
   {
     num: '04',
-    title: 'Watch your score climb',
-    desc: 'The system tracks progress, auto-adjusts difficulty and guides you toward your target band step by step.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.42.jpeg',
+    title: 'Lock in the result and keep growing',
+    desc: 'The system adapts difficulty, revisits weak topics and pushes you toward target score.',
+    screenshot: '/illustrations/growth.svg',
     tag: 'Result',
     tagColor: 'bg-emerald-100 text-emerald-700',
     accent: '#10B981',
@@ -159,21 +159,21 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ lang, onOp
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ── */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+          <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
           <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold uppercase tracking-wider">
             <Zap className="w-3.5 h-3.5" />
             {lang === 'ru' ? 'Как это работает' : 'How it works'}
           </div>
           <h2 className="reveal text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display" style={{ transitionDelay: '.08s' }}>
             {lang === 'ru'
-              ? <>От нуля до цели<br /><span className="brand-gradient-text">за 4 простых шага</span></>
+              ? <>От диагностики до результата<br /><span className="brand-gradient-text">без лишних отвлечений</span></>
               : <>From zero to your target<br /><span className="brand-gradient-text">in 4 simple steps</span></>
             }
           </h2>
           <p className="reveal text-slate-500 text-base leading-relaxed" style={{ transitionDelay: '.14s' }}>
             {lang === 'ru'
-              ? 'Никакой перегруженной графики. Только понятный путь, реальные экраны и фото живого учебного процесса.'
-              : 'No cluttered visuals. Just a clear path, real screens, and photos from actual study moments.'}
+              ? 'Секция показывает понятный путь ученика: где начать, что делать дальше и как понять, что ты реально растёшь.'
+              : 'The section shows a clear learner journey: where to start, what to do next, and how to know you are improving.'}
           </p>
         </div>
 
@@ -279,14 +279,14 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ lang, onOp
                   </div>
                 </div>
 
-                {/* screenshot area */}
-                <div className="relative h-[380px] sm:h-[460px] bg-slate-100 overflow-hidden">
+                {/* illustration area */}
+                <div className="relative h-[380px] sm:h-[460px] bg-[#FFF7F1] overflow-hidden">
                   {steps.map((s, i) => (
                     <img
                       key={i}
                       src={s.screenshot}
                       alt={s.tag}
-                      className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 bg-white
+                      className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 p-4
                         ${i === activeStep ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.03]'}`}
                     />
                   ))}
@@ -297,7 +297,9 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ lang, onOp
                       style={{ background: `linear-gradient(135deg, #F97316, #F43F5E)` }}>
                       {step.num}
                     </div>
-                    <span className="text-xs font-extrabold text-slate-800">{step.tag}</span>
+                    <span className="text-xs font-extrabold text-slate-800">
+                      {lang === 'ru' ? step.title : step.title}
+                    </span>
                   </div>
 
                   {/* detail badge — bottom */}
@@ -311,7 +313,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ lang, onOp
                 <div className="px-5 py-4 bg-white border-t border-slate-100 flex items-center justify-between gap-4">
                   <div>
                     <h4 className="font-extrabold text-sm text-slate-900 font-display">{step.title}</h4>
-                    <p className="text-xs text-slate-500 mt-0.5">{step.desc}</p>
+                    <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{step.desc}</p>
                   </div>
                   <div className="flex gap-1 shrink-0">
                     {steps.map((_, i) => (

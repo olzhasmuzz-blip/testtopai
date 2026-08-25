@@ -12,6 +12,7 @@ const STEP_ICONS: Record<number, React.ReactNode> = {
 
 // brand-aligned step colors
 const STEP_COLORS = ['#F97316', '#F43F5E', '#EC4899', '#FBBF24'];
+const LOOP_VISUAL = '/illustrations/solution-loop.svg';
 
 export const SolutionSection: React.FC<SolutionSectionProps> = ({ lang }) => {
   const t = translations[lang];
@@ -105,19 +106,26 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ lang }) => {
           </div>
 
           {/* Active step hero */}
-          <div className="rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl">
+          <div className="rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-2xl">
             <div className="grid grid-cols-1 lg:grid-cols-12">
-              <div className="lg:col-span-5 relative h-64 lg:h-auto overflow-hidden">
-                <img key={step.stepNumber} src={step.photo} alt={step.title}
-                  className="w-full h-full object-cover transition-transform duration-700"
-                  style={{ animation: 'slide-up .45s cubic-bezier(.16,1,.3,1)' }} referrerPolicy="no-referrer" />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-900/60 hidden lg:block" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent lg:hidden" />
-                <div className="absolute bottom-4 left-4">
+              <div className="lg:col-span-5 relative min-h-[320px] overflow-hidden bg-[#FFF7F1] flex items-center justify-center p-6">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.16),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(244,63,94,0.08),transparent_35%)]" />
+                <img
+                  key={step.stepNumber}
+                  src={LOOP_VISUAL}
+                  alt={lang === 'ru' ? 'Замкнутый цикл обучения' : 'Closed loop learning'}
+                  className="relative z-10 w-full h-full max-h-[360px] object-contain drop-shadow-2xl"
+                  style={{ animation: 'slide-up .45s cubic-bezier(.16,1,.3,1)' }}
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute bottom-4 left-4 z-20">
                   <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold text-white"
-                    style={{ backgroundColor: STEP_COLORS[step.stepNumber - 1] + 'CC' }}>
-                    STEP {step.stepNumber}: {step.tag}
+                    style={{ backgroundColor: STEP_COLORS[step.stepNumber - 1] + 'EE' }}>
+                    {lang === 'ru' ? 'ШАГ' : 'STEP'} {step.stepNumber}: {step.tag}
                   </span>
+                </div>
+                <div className="absolute top-4 right-4 z-20 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur border border-orange-100 text-xs font-bold text-slate-700 shadow-sm">
+                  {lang === 'ru' ? 'Живой цикл' : 'Live loop'}
                 </div>
               </div>
               <div className="lg:col-span-7 p-7 sm:p-10 text-white flex flex-col justify-between">
@@ -126,7 +134,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ lang }) => {
                     <div className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
                       <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
-                        {lang === 'ru' ? 'Замкнутый AI-процесс' : lang === 'kz' ? 'Тұйық AI-процесс' : 'Closed-Loop AI Process'}
+                        {lang === 'ru' ? 'Замкнутый AI-цикл' : lang === 'kz' ? 'Тұйық AI-цикл' : 'Closed-Loop AI Cycle'}
                       </span>
                     </div>
                     <button onClick={() => setPlaying(!playing)}

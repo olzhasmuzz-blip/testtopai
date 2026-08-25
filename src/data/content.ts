@@ -44,9 +44,9 @@ export const translations = {
       statsValue: '10,000+ тестов сдано с прогнозом балла ±0.25',
     },
     problem: {
-      sectionTag: 'Проблема рынка',
-      title: 'Подготовка к глобальным экзаменам критически устарела',
-      subtitle: 'Миллионы студентов ежегодно теряют месяцы и тысячи долларов из-за неэффективных традиционных методов обучения.',
+      sectionTag: 'Проблема ученика',
+      title: 'Старая подготовка съедает время, деньги и мотивацию',
+      subtitle: 'Мы показываем реальные барьеры, с которыми сталкивается сам студент: цена, ожидание, разрозненные материалы и слабый фидбек.',
       quote: '«Образование все еще остается ручным трудом в мире, который уже стал полностью автоматизированным.»',
       items: [
         {
@@ -123,26 +123,26 @@ export const translations = {
     },
     solution: {
       sectionTag: 'Наше решение',
-      title: 'Замкнутая система обучения на базе AI (Closed-Loop)',
-      subtitle: 'Непрерывный цикл прогресса без необходимости в дорогостоящем репетиторе.',
-      outcomeTitle: 'Результат: непрерывный рост балла без участия человека',
-      outcomeDesc: 'Система обучается на каждом ответе ученика и автоматически оптимизирует траекторию подготовки.',
+      title: 'AI-цикл обучения, который сам подстраивается под ученика',
+      subtitle: 'Один цикл: диагностика, практика, фидбек и повторение до устойчивого роста балла.',
+      outcomeTitle: 'Результат: студент видит, что улучшить и что делать дальше',
+      outcomeDesc: 'Система обучается на каждом ответе и автоматически перестраивает следующий шаг подготовки.',
       accuracyBadge: '95%',
       accuracyLabel: 'Точность оценки',
       availabilityBadge: '24/7',
       availabilityLabel: 'Доступность',
-      engineNotice: 'Не просто приложение — это самообучающийся AI-движок нового поколения.',
-      runSimButton: 'Запустить тест AI-движка',
+      engineNotice: 'Не просто интерфейс, а непрерывный учебный контур с понятной пользой для ученика.',
+      runSimButton: 'Перезапустить AI-цикл',
     },
     modules: {
-      sectionTag: 'Продукт & Модули',
-      title: '4 ключевых модуля IELTS с глубокой AI-аналитикой',
-      subtitle: 'Mobile-first интерфейс, геймификация и моментальная обратная связь по официальным стандартам Cambridge & IDP.',
-      aiLayerTitle: 'Интеллектуальный AI-слой TestTop',
-      aiLayerSub: '4 фундаментальные сквозные возможности платформы:',
-      practiceNowBtn: 'Попробовать прямо сейчас',
-      interactiveDemoTitle: 'Интерактивная песочница IELTS прямо на лендинге',
-      interactiveDemoSub: 'Проверьте свое эссе или запишите устный ответ и получите оценку за 2 секунды!',
+      sectionTag: 'Продукт и модули',
+      title: 'Четыре модуля, которые ведут ученика к результату',
+      subtitle: 'Каждый модуль показывает не просто экран, а следующий полезный шаг для пользователя.',
+      aiLayerTitle: 'Что студент получает внутри платформы',
+      aiLayerSub: 'Четыре понятных результата без лишнего шума:',
+      practiceNowBtn: 'Попробовать модуль',
+      interactiveDemoTitle: 'Живое демо прямо на лендинге',
+      interactiveDemoSub: 'Проверьте эссе или запишите ответ и получите быструю оценку.',
     },
     positioning: {
       sectionTag: 'Конкурентное позиционирование',
@@ -155,8 +155,8 @@ export const translations = {
     },
     traction: {
       sectionTag: 'Тракшн и результаты',
-      title: 'Взрывной рост и признание студентами по всему миру',
-      subtitle: 'Продукт решает реальные боли пользователей с максимальной релевантностью обратной связи.',
+      title: 'Понятный прогресс, который видит сам студент',
+      subtitle: 'Мы показываем не шум, а реальные признаки пользы: вовлечённость, возврат, качество оценки и рост уверенности.',
       engagementHeader: 'Вовлеченность (за 30 дней)',
       aiPerformanceHeader: 'Производительность AI (Real-time)',
       liveActivityTitle: 'Живой поток активности студентов',
@@ -540,7 +540,7 @@ export const examMetrics: ExamMetric[] = [
     description: 'Academic & General Training (Global university & immigration)',
     volumeNumber: 4.2,
     highlightColor: '#4F46E5',
-    photo: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&auto=format&fit=crop&q=80',
+    photo: '/illustrations/hero-learning.svg',
     targetAudience: 'University admissions & Global relocation',
   },
   {
@@ -550,7 +550,7 @@ export const examMetrics: ExamMetric[] = [
     description: 'Business English (Corporate hiring across Asia & EMEA)',
     volumeNumber: 7.1,
     highlightColor: '#6366F1',
-    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&auto=format&fit=crop&q=80',
+    photo: '/illustrations/modules-dashboard.svg',
     targetAudience: 'Corporate career promotions & international firms',
   },
   {
@@ -560,7 +560,7 @@ export const examMetrics: ExamMetric[] = [
     description: 'US College Admissions & Scholarship qualifications',
     volumeNumber: 2.1,
     highlightColor: '#10B981',
-    photo: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&auto=format&fit=crop&q=80',
+    photo: '/illustrations/growth.svg',
     targetAudience: 'US Ivy League & top scholarship applicants',
   },
   {
@@ -570,7 +570,7 @@ export const examMetrics: ExamMetric[] = [
     description: 'Global Graduate, MBA, and PhD admissions',
     volumeNumber: 0.35,
     highlightColor: '#F59E0B',
-    photo: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&auto=format&fit=crop&q=80',
+    photo: '/illustrations/problem-overload.svg',
     targetAudience: 'Executive MBA & Master degree researchers',
   },
 ];
@@ -582,7 +582,7 @@ export const globalHubs = [
     flag: '🇬🇧',
     exam: 'IELTS Academic',
     candidates: '1.2M candidates',
-    photo: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&auto=format&fit=crop&q=80',
+    photo: '/illustrations/hero-learning.svg',
   },
   {
     city: 'Singapore',
@@ -590,7 +590,7 @@ export const globalHubs = [
     flag: '🇸🇬',
     exam: 'IELTS & SAT',
     candidates: '850K candidates',
-    photo: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=400&auto=format&fit=crop&q=80',
+    photo: '/illustrations/modules-dashboard.svg',
   },
   {
     city: 'Seoul & Tokyo',
@@ -598,7 +598,7 @@ export const globalHubs = [
     flag: '🇰🇷',
     exam: 'TOEIC & Business',
     candidates: '2.4M candidates',
-    photo: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=400&auto=format&fit=crop&q=80',
+    photo: '/illustrations/solution-loop.svg',
   },
   {
     city: 'Toronto',
@@ -606,7 +606,7 @@ export const globalHubs = [
     flag: '🇨🇦',
     exam: 'IELTS General',
     candidates: '920K candidates',
-    photo: 'https://images.unsplash.com/photo-1517090504586-fde19ea6066f?w=400&auto=format&fit=crop&q=80',
+    photo: '/illustrations/traction-students.svg',
   },
 ];
 
@@ -618,7 +618,7 @@ export const techPillars: TechPillar[] = [
     metric: '95% Accuracy',
     metricLabel: 'vs 70% human tutor consistency',
     iconName: 'BrainCircuit',
-    photo: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=80',
+    photo: '/illustrations/solution-loop.svg',
     bullets: [
       'Task Achievement & Coherence assessment',
       'Lexical diversity & advanced collocation repair',
@@ -632,7 +632,7 @@ export const techPillars: TechPillar[] = [
     metric: 'Native-like',
     metricLabel: 'phoneme & stress detection',
     iconName: 'Mic',
-    photo: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500&auto=format&fit=crop&q=80',
+    photo: '/illustrations/feedback.svg',
     bullets: [
       'Real-time speech-to-text with accent tolerance',
       'Intonation, cadence & hesitation latency analysis',
@@ -646,7 +646,7 @@ export const techPillars: TechPillar[] = [
     metric: '40% Faster',
     metricLabel: 'target score achievement',
     iconName: 'Sparkles',
-    photo: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&auto=format&fit=crop&q=80',
+    photo: '/illustrations/diagnostic.svg',
     bullets: [
       'Micro-gap diagnosis after every single question',
       'Dynamic difficulty tuning (CEFR B1 → C2)',
@@ -660,7 +660,7 @@ export const techPillars: TechPillar[] = [
     metric: '99.9% Uptime',
     metricLabel: '< 2.0s AI generation latency',
     iconName: 'Cloud',
-    photo: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&auto=format&fit=crop&q=80',
+    photo: '/illustrations/growth.svg',
     bullets: [
       'Available 24/7 on any mobile or desktop device',
       'Infinite concurrency without classroom bottlenecks',
@@ -677,7 +677,7 @@ export const loopSteps: LoopStep[] = [
     tag: 'Input',
     latency: 'Instant',
     iconName: 'UserCheck',
-    photo: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&auto=format&fit=crop&q=80',
+    photo: '/illustrations/diagnostic.svg',
     details: 'Interactive interface simulates official exam conditions with countdown timers and realistic question formats.',
   },
   {
@@ -687,7 +687,7 @@ export const loopSteps: LoopStep[] = [
     tag: 'Analysis',
     latency: '2.0s',
     iconName: 'Cpu',
-    photo: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=500&auto=format&fit=crop&q=80',
+    photo: '/illustrations/practice.svg',
     details: 'Parallel multi-agent evaluation calculates precise band scores across all four standard grading criteria.',
   },
   {
@@ -697,7 +697,7 @@ export const loopSteps: LoopStep[] = [
     tag: 'Output',
     latency: 'Immediate',
     iconName: 'FileText',
-    photo: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&auto=format&fit=crop&q=80',
+    photo: '/illustrations/feedback.svg',
     details: 'Detailed line-by-line annotations highlighting better synonyms, linking devices, and grammatical fixes.',
   },
   {
@@ -707,7 +707,7 @@ export const loopSteps: LoopStep[] = [
     tag: 'Loop',
     latency: 'Continuous',
     iconName: 'RefreshCw',
-    photo: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&auto=format&fit=crop&q=80',
+    photo: '/illustrations/growth.svg',
     details: 'Automatically updates the spaced repetition queue to reinforce precisely what the student missed.',
   },
 ];
@@ -720,7 +720,7 @@ export const moduleSkills: ModuleSkill[] = [
     accuracy: '92% Accuracy',
     color: '#059669',
     iconName: 'BookOpen',
-    photo: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&auto=format&fit=crop&q=80',
+    photo: '/illustrations/hero-learning.svg',
     capabilities: [
       'Diagram label completion & matching headings',
       'True / False / Not Given rapid verification',
@@ -737,7 +737,7 @@ export const moduleSkills: ModuleSkill[] = [
     accuracy: '88% Accuracy',
     color: '#3B82F6',
     iconName: 'Headphones',
-    photo: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&auto=format&fit=crop&q=80',
+    photo: '/illustrations/modules-dashboard.svg',
     capabilities: [
       'British, Australian, American & Canadian accents',
       'Interactive synced audio transcripts with repeat loops',
@@ -754,7 +754,7 @@ export const moduleSkills: ModuleSkill[] = [
     accuracy: '95% Accuracy',
     color: '#10B981',
     iconName: 'PenTool',
-    photo: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&auto=format&fit=crop&q=80',
+    photo: '/illustrations/feedback.svg',
     capabilities: [
       'Task 1 & Task 2 band score estimator (1.0 - 9.0)',
       'Grammar error correction with clear explanations',
@@ -771,7 +771,7 @@ export const moduleSkills: ModuleSkill[] = [
     accuracy: '90% Accuracy',
     color: '#F59E0B',
     iconName: 'Mic',
-    photo: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=600&auto=format&fit=crop&q=80',
+    photo: '/illustrations/solution-loop.svg',
     capabilities: [
       'Interactive voice examiner asking Part 1, 2, and 3 questions',
       'Fluency, pronunciation, and hesitation latency tracker',
