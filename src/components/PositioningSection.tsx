@@ -8,26 +8,13 @@ interface PositioningSectionProps { lang: Language; }
 export const PositioningSection: React.FC<PositioningSectionProps> = ({ lang }) => {
   const t = translations[lang];
   const [highlightRow, setHighlightRow] = useState<number | null>(null);
-  const [visibleRows, setVisibleRows] = useState<number[]>([]);
-  const tableRef = useRef<HTMLDivElement>(null);
+  const [visibleRows] = useState<number[]>(comparisonRows.map((_, i) => i));
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const io = new IntersectionObserver(entries =>
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
     sectionRef.current?.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        comparisonRows.forEach((_, i) => {
-          setTimeout(() => setVisibleRows(prev => [...prev, i]), i * 80);
-        });
-      }
-    }, { threshold: 0.2 });
-    if (tableRef.current) io.observe(tableRef.current);
     return () => io.disconnect();
   }, []);
 
@@ -115,20 +102,19 @@ export const PositioningSection: React.FC<PositioningSectionProps> = ({ lang }) 
         </div>
 
         {/* Comparison table */}
-        <div ref={tableRef} className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden reveal mb-10">
+        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden reveal mb-10">
           <div className="grid grid-cols-12 px-5 py-3 bg-slate-50 border-b border-slate-200 text-xs font-bold font-mono uppercase text-slate-400">
             <div className="col-span-4">{lang === 'ru' ? 'Критерий' : 'Feature'}</div>
             <div className="col-span-4 text-rose-500 text-center">{lang === 'ru' ? 'Устаревший рынок' : 'Legacy Market'}</div>
             <div className="col-span-4 text-orange-600 text-center">TestTop AI</div>
           </div>
           {comparisonRows.map((row, i) => (
-            <div key={i}
-              onMouseEnter={() => setHighlightRow(i)}
-              onMouseLeave={() => setHighlightRow(null)}
-              className={`grid grid-cols-12 px-5 py-4 border-b border-slate-100 transition-all duration-300 cursor-default
-                ${visibleRows.includes(i) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}
+              <div key={i}
+                onMouseEnter={() => setHighlightRow(i)}
+                onMouseLeave={() => setHighlightRow(null)}
+                className={`grid grid-cols-12 px-5 py-4 border-b border-slate-100 transition-all duration-300 cursor-default opacity-100 translate-x-0
                 ${highlightRow === i ? 'bg-orange-50/60' : 'hover:bg-slate-50'}`}
-              style={{ transitionDelay: `${i * 60}ms`, transition: 'opacity .4s ease, transform .4s ease, background .2s ease' }}>
+                style={{ transitionDelay: `${i * 60}ms`, transition: 'opacity .4s ease, transform .4s ease, background .2s ease' }}>
               <div className="col-span-4 text-sm font-semibold text-slate-800 flex items-center">{row.feature}</div>
               <div className="col-span-4 text-xs text-slate-500 flex items-center justify-center text-center px-2">
                 <span className="flex items-center gap-1.5"><XCircle className="w-4 h-4 text-rose-400 shrink-0" />{row.legacy}</span>
