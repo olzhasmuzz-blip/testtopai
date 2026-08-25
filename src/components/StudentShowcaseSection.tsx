@@ -66,7 +66,7 @@ const SCREENSHOTS = [
   },
 ];
 
-const SHOWCASE_ILLUSTRATION = '/illustrations/hero-learning.svg';
+const SHOWCASE_ILLUSTRATION = '/illustrations/app-mobile-flow.png';
 
 export const StudentShowcaseSection: React.FC<StudentShowcaseSectionProps> = ({ lang, onOpenTestModal }) => {
   const [active, setActive] = useState(0);
@@ -130,7 +130,7 @@ export const StudentShowcaseSection: React.FC<StudentShowcaseSectionProps> = ({ 
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start relative z-10">
           <div className="lg:col-span-5 space-y-6 reveal-left">
-            <div className="rounded-[28px] overflow-hidden shadow-2xl border border-slate-100 bg-[#FFF7F1]">
+              <div className="rounded-[28px] overflow-hidden shadow-2xl border border-slate-100 bg-[#FFF7F1]">
               <div className="p-5 border-b border-orange-100 flex items-center justify-between">
                 <div>
                   <h3 className="text-lg font-black text-slate-900 font-display">
@@ -149,7 +149,7 @@ export const StudentShowcaseSection: React.FC<StudentShowcaseSectionProps> = ({ 
               <img
                 src={SHOWCASE_ILLUSTRATION}
                 alt=""
-                className="w-full h-[320px] object-contain p-5"
+                className="w-full h-[320px] object-cover"
                 referrerPolicy="no-referrer"
               />
               <div className="grid grid-cols-3 gap-3 p-5 pt-0">

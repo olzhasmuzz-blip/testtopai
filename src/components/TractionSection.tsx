@@ -32,7 +32,7 @@ function useCounter(target: number, running: boolean, duration = 1400) {
   return val;
 }
 
-const TRACTION_VISUAL = '/illustrations/traction-students.svg';
+const TRACTION_VISUAL = '/illustrations/traction-dashboard.png';
 
 export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
   const t = translations[lang];
@@ -106,7 +106,7 @@ export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12 reveal stagger" style={{ transitionDelay: '.18s' }}>
           <div className="lg:col-span-5 rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm">
-            <img src={TRACTION_VISUAL} alt="" className="w-full h-full max-h-[360px] object-contain bg-[#FFF7F1] p-4" referrerPolicy="no-referrer" />
+            <img src={TRACTION_VISUAL} alt="" className="w-full h-full max-h-[360px] object-cover" referrerPolicy="no-referrer" />
           </div>
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
@@ -139,8 +139,8 @@ export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
         </div>
 
         <div ref={countersRef} className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12 reveal stagger" style={{ transitionDelay: '.2s' }}>
-          {tractionMetrics.map((m, i) => (
-            <div key={i} className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm text-left card-hover overflow-hidden">
+            {tractionMetrics.map((m, i) => (
+              <div key={i} className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm text-left card-hover overflow-hidden">
               <div className="h-24 rounded-2xl overflow-hidden mb-4 brand-gradient relative">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.25),transparent_35%)]" />
               </div>

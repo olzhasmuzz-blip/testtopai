@@ -15,7 +15,7 @@ const TYPEWRITER_PHRASES = [
   'TOEIC 990/990',
 ];
 
-const HERO_ILLUSTRATION = '/illustrations/hero-learning.svg';
+const HERO_ILLUSTRATION = '/illustrations/hero-study-scene.png';
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
   const t = translations[lang];
@@ -157,9 +157,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
               <div className="grid grid-cols-12 gap-3">
                 <div className="col-span-8 rounded-[28px] overflow-hidden shadow-2xl border border-slate-100 bg-white p-3">
                   <div className="relative rounded-[22px] overflow-hidden bg-[#FFF7F1]">
-                    <img src={HERO_ILLUSTRATION} alt="" className="w-full h-[360px] object-contain p-3" referrerPolicy="no-referrer" />
+                    <img src={HERO_ILLUSTRATION} alt="" className="w-full h-[360px] object-cover" referrerPolicy="no-referrer" />
                     <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur border border-orange-100 text-[10px] font-bold text-slate-700 shadow-sm">
-                      Real learning flow
+                      Живая учебная сцена
                     </div>
                   </div>
                 </div>
@@ -191,7 +191,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
                       </span>
                       <span className="px-2 py-1 rounded-full bg-white/10 border border-white/10 text-[10px] font-bold">+1.0</span>
                     </div>
-                    <img src={HERO_ILLUSTRATION} alt="" className="w-full h-24 object-contain opacity-90" referrerPolicy="no-referrer" />
+                    <div className="space-y-3">
+                      <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                        <div className="h-full w-[82%] rounded-full brand-gradient" />
+                      </div>
+                      <p className="text-sm text-white/80 leading-relaxed">
+                        {lang === 'ru'
+                          ? 'Диагностика, практика и фидбек сходятся в один понятный цикл.'
+                          : 'Diagnostic, practice and feedback come together in one clear loop.'}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="col-span-12 rounded-[28px] overflow-hidden shadow-xl border border-slate-100 bg-white">
@@ -207,26 +216,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
                       </p>
                     </div>
                     <div className="col-span-2 rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 p-2">
-                      <div className="w-full h-24 rounded-xl brand-gradient relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.2),transparent_40%)]" />
-                        <div className="absolute inset-0 flex items-center justify-center text-white text-xs font-black uppercase tracking-[0.2em]">
-                          AI · IELTS · TOEIC
+                      <div className="w-full h-24 rounded-xl bg-[#FFF7F1] border border-orange-100 p-3 flex items-center justify-between gap-3">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.2em] font-black text-slate-400">
+                            {lang === 'ru' ? 'План на день' : 'Today'}
+                          </p>
+                          <p className="text-sm font-extrabold text-slate-900 mt-1">
+                            {lang === 'ru' ? '1 тест + 1 разбор' : '1 test + 1 review'}
+                          </p>
                         </div>
+                        <div className="w-10 h-10 rounded-2xl brand-gradient shadow-md" />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="absolute -left-5 top-8 hidden sm:block animate-float-slow">
-                <div className="bg-white/95 backdrop-blur rounded-3xl shadow-xl border border-orange-100 p-2 w-36">
-                  <img src={HERO_ILLUSTRATION} alt="" className="w-full h-28 rounded-2xl object-contain bg-[#FFF7F1]" referrerPolicy="no-referrer" />
-                </div>
-              </div>
               <div className="absolute -right-6 bottom-8 hidden sm:block animate-float-med">
-                <div className="bg-white/95 backdrop-blur rounded-3xl shadow-xl border border-orange-100 p-2 w-40">
-                  <div className="w-full h-32 rounded-2xl brand-gradient text-white flex items-center justify-center font-black">
-                    {lang === 'ru' ? 'Путь без шума' : 'No visual noise'}
+                <div className="bg-white/95 backdrop-blur rounded-3xl shadow-xl border border-orange-100 p-3 w-40">
+                  <div className="w-full h-32 rounded-2xl bg-slate-900 text-white p-4 flex flex-col justify-between">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] uppercase tracking-wider font-bold text-white/50 font-mono">
+                        {lang === 'ru' ? 'Фокус' : 'Focus'}
+                      </span>
+                      <span className="px-2 py-1 rounded-full bg-white/10 text-[10px] font-black">92%</span>
+                    </div>
+                    <p className="text-xs text-white/80 leading-relaxed">
+                      {lang === 'ru' ? 'Без визуального шума и лишних повторов.' : 'No visual noise, no repeated assets.'}
+                    </p>
                   </div>
                 </div>
               </div>
