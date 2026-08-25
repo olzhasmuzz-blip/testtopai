@@ -58,9 +58,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
   }, []);
 
   const pillColors = [
-    { bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-600', icon: 'bg-indigo-100' },
+    { bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-600', icon: 'bg-orange-100' },
     { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-600', icon: 'bg-emerald-100' },
-    { bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-600', icon: 'bg-blue-100' },
+    { bg: 'bg-rose-50', border: 'border-rose-200', text: 'text-rose-600', icon: 'bg-rose-100' },
   ];
   const pillIcons = [<Zap className="w-4 h-4" />, <Sparkles className="w-4 h-4" />, <Smartphone className="w-4 h-4" />];
 
@@ -70,16 +70,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
       {/* ── Animated mesh background ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-80px] left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.10) 0%, transparent 70%)' }} />
+          style={{ background: 'radial-gradient(ellipse at center, rgba(249,115,22,0.10) 0%, transparent 70%)' }} />
         <div className="absolute top-40 right-[-100px] w-[420px] h-[420px] rounded-full animate-float-slow"
           style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%)' }} />
         <div className="absolute bottom-0 left-[-60px] w-[340px] h-[340px] rounded-full animate-float-med"
-          style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(244,63,94,0.07) 0%, transparent 70%)' }} />
         {/* grid dots */}
         <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="1" fill="#4F46E5" />
+              <circle cx="1" cy="1" r="1" fill="#F97316" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
@@ -93,8 +93,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
           <div className="lg:col-span-7 space-y-7 text-left">
 
             {/* badge */}
-            <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-indigo-600 animate-ping" />
+            <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping" />
               {t.hero.badge}
             </div>
 
@@ -104,17 +104,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
                 {lang === 'ru' ? (
                   <>
                     Первый в мире<br />
-                    <span className="relative">
-                      <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-500 bg-clip-text text-transparent animate-gradient-x">
-                        AI-тренажер
-                      </span>
+                    <span className="brand-gradient-text animate-gradient-x">
+                      AI-тренажер
                     </span>
                     {' '}для глобальных экзаменов
                   </>
                 ) : (
                   <>
                     The first{' '}
-                    <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-500 bg-clip-text text-transparent animate-gradient-x">
+                    <span className="brand-gradient-text animate-gradient-x">
                       AI-powered
                     </span>
                     <br />global exam trainer
@@ -126,7 +124,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
                 <span className="text-slate-400 text-sm font-medium">
                   {lang === 'ru' ? 'Цель:' : 'Target:'}
                 </span>
-                <span className="text-2xl font-black text-indigo-600 font-mono cursor-blink min-w-[160px]">
+                <span className="text-2xl font-black brand-gradient-text font-mono cursor-blink min-w-[160px]">
                   {displayed}
                 </span>
               </div>
@@ -145,7 +143,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
                   <div className={`w-8 h-8 rounded-xl ${pillColors[i].icon} ${pillColors[i].text} flex items-center justify-center mb-2.5`}>
                     {pillIcons[i]}
                   </div>
-                  <h4 className={`font-extrabold text-sm text-slate-900`}>{pill.title}</h4>
+                  <h4 className="font-extrabold text-sm text-slate-900">{pill.title}</h4>
                   <p className="text-xs text-slate-500 mt-1 leading-relaxed">{pill.desc}</p>
                 </div>
               ))}
@@ -154,14 +152,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
             {/* CTAs */}
             <div className="reveal flex flex-col sm:flex-row items-stretch sm:items-center gap-3" style={{ transitionDelay: '.2s' }}>
               <button onClick={onOpenTestModal}
-                className="group px-7 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-xl shadow-indigo-600/30 transition-all hover:scale-[1.03] active:scale-[0.98] neon-pulse">
+                className="group px-7 py-4 rounded-xl brand-gradient text-white font-bold text-sm flex items-center justify-center gap-2.5 brand-glow transition-all hover:scale-[1.03] active:scale-[0.98] neon-pulse">
                 <Sparkles className="w-4 h-4" />
                 {t.hero.ctaPrimary}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
               <a href="#modules"
-                className="px-7 py-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-900 font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-all hover:border-indigo-300">
-                <Play className="w-4 h-4 text-indigo-600 fill-indigo-600" />
+                className="px-7 py-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-900 font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-all hover:border-orange-300">
+                <Play className="w-4 h-4 text-orange-500 fill-orange-500" />
                 {t.hero.ctaSecondary}
               </a>
             </div>
@@ -189,11 +187,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
           <div className="lg:col-span-5 flex justify-center relative">
             {/* ambient glow */}
             <div className="absolute inset-0 rounded-[60px] blur-3xl -z-10"
-              style={{ background: 'radial-gradient(ellipse, rgba(99,102,241,0.18) 0%, rgba(16,185,129,0.07) 60%, transparent 80%)' }} />
+              style={{ background: 'radial-gradient(ellipse, rgba(249,115,22,0.18) 0%, rgba(244,63,94,0.10) 60%, transparent 80%)' }} />
 
             {/* Floating stat badges */}
             <div className="absolute -left-6 top-16 animate-float-slow z-20">
-              <div className="glass-panel rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3 border border-indigo-100">
+              <div className="glass-panel rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3 border border-orange-100">
                 <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
@@ -204,8 +202,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
               </div>
             </div>
             <div className="absolute -right-4 bottom-24 animate-float-med z-20">
-              <div className="glass-panel rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3 border border-emerald-100">
-                <div className="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
+              <div className="glass-panel rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3 border border-orange-100">
+                <div className="w-9 h-9 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center">
                   <Zap className="w-4 h-4" />
                 </div>
                 <div>
@@ -234,7 +232,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
                 <div className="flex border-b border-slate-100 bg-slate-50/80 px-2 py-1.5 text-[10px] font-bold gap-1">
                   {(['tests', 'speaking'] as const).map(tab => (
                     <button key={tab} onClick={() => setActiveTab(tab)}
-                      className={`flex-1 py-1.5 rounded-lg transition-all ${activeTab === tab ? 'bg-white shadow text-indigo-600' : 'text-slate-400 hover:text-slate-700'}`}>
+                      className={`flex-1 py-1.5 rounded-lg transition-all ${activeTab === tab ? 'bg-white shadow text-orange-600' : 'text-slate-400 hover:text-slate-700'}`}>
                       {tab === 'tests' ? '📋 Tests' : '🎤 Speaking'}
                     </button>
                   ))}
@@ -245,17 +243,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
                   <div className="p-4 space-y-3 overflow-y-auto flex-1 text-xs slide-up">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center font-black text-[10px]">TT</div>
+                        <div className="w-7 h-7 rounded-full brand-gradient text-white flex items-center justify-center font-black text-[10px]">TT</div>
                         <span className="font-black text-base text-slate-900 font-display">Tests</span>
                       </div>
-                      <span className="px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[10px] font-bold rounded-full border border-indigo-200 font-mono">Band 8.0 Target</span>
+                      <span className="px-2 py-0.5 bg-orange-50 text-orange-600 text-[10px] font-bold rounded-full border border-orange-200 font-mono">Band 8.0 Target</span>
                     </div>
 
                     <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 font-mono">4 Skills</p>
                     <div className="grid grid-cols-2 gap-2">
                       {[
                         { label: 'Reading', acc: '92%', color: 'from-emerald-500 to-teal-600', Icon: BookOpen },
-                        { label: 'Listening', acc: '88%', color: 'from-indigo-500 to-indigo-700', Icon: Headphones },
+                        { label: 'Listening', acc: '88%', color: 'from-orange-500 to-rose-500', Icon: Headphones },
                         { label: 'Writing', acc: '95%', color: 'from-blue-500 to-cyan-600', Icon: PenTool },
                         { label: 'Speaking', acc: '90%', color: 'from-amber-400 to-orange-500', Icon: Mic },
                       ].map(({ label, acc, color, Icon }, i) => (
@@ -271,7 +269,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
                     {/* progress bars */}
                     <div className="bg-slate-50 rounded-xl p-3 space-y-2 border border-slate-100">
                       <p className="text-[9px] font-black text-slate-400 uppercase font-mono">Weekly progress</p>
-                      {[['Writing', 82, '#6366F1'], ['Speaking', 70, '#F59E0B'], ['Reading', 94, '#10B981']].map(([lbl, pct, clr]) => (
+                      {[['Writing', 82, '#F97316'], ['Speaking', 70, '#F43F5E'], ['Reading', 94, '#10B981']].map(([lbl, pct, clr]) => (
                         <div key={lbl as string}>
                           <div className="flex justify-between text-[9px] mb-0.5 font-mono">
                             <span className="text-slate-600">{lbl as string}</span>
@@ -305,8 +303,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
                     {/* waveform */}
                     <div className="flex items-end justify-center gap-1 h-12 my-4">
                       {[4,8,14,10,18,12,20,9,16,11,19,7,15,8,12].map((h, i) => (
-                        <div key={i} className="w-1.5 rounded-full bg-indigo-400 wave-bar"
-                          style={{ height: isRecording ? `${h * 2}px` : '4px', animationDelay: `${i * 55}ms`, animationDuration: `${0.6 + i * 0.04}s` }} />
+                        <div key={i} className="w-1.5 rounded-full wave-bar"
+                          style={{
+                            background: 'linear-gradient(to top, #F97316, #F43F5E)',
+                            height: isRecording ? `${h * 2}px` : '4px',
+                            animationDelay: `${i * 55}ms`,
+                            animationDuration: `${0.6 + i * 0.04}s`,
+                          }} />
                       ))}
                     </div>
 
@@ -316,7 +319,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, onOpenTestModal 
                       </p>
                       <button onClick={() => setIsRecording(!isRecording)}
                         className={`w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all ${
-                          isRecording ? 'bg-rose-500 animate-pulse' : 'bg-indigo-600 hover:bg-indigo-500'}`}>
+                          isRecording ? 'bg-rose-500 animate-pulse' : 'brand-gradient hover:opacity-90'}`}>
                         <Mic className="w-4 h-4" />
                         {isRecording ? 'Остановить запись' : 'Начать Speaking'}
                       </button>

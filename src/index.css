@@ -1,12 +1,18 @@
 @import "tailwindcss";
 
+/* ─── Brand tokens ──────────────────────────────────────
+   Primary gradient: orange #F97316 → rose/pink #F43F5E
+   Accent:           amber #FBBF24
+   Dark bg:          slate-950 #020617
+─────────────────────────────────────────────────────── */
+
 @layer base {
   html { scroll-behavior: smooth; }
 
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: #0F172A;
-    background-color: #F8FAFC;
+    background-color: #FFFFFF;
     overflow-x: hidden;
     letter-spacing: -0.01em;
   }
@@ -22,31 +28,55 @@
   }
 }
 
+/* ─── CSS Variables ─────────────────────────────────── */
+:root {
+  --brand-orange: #F97316;
+  --brand-rose:   #F43F5E;
+  --brand-pink:   #EC4899;
+  --brand-amber:  #FBBF24;
+  --grad-start:   #F97316;
+  --grad-end:     #F43F5E;
+}
+
 /* ─── Scrollbar ─────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #F1F5F9; }
-::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+::-webkit-scrollbar-track { background: #FFF7F5; }
+::-webkit-scrollbar-thumb { background: #FCA5A5; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #F87171; }
+
+/* ─── Brand gradient utility classes ───────────────── */
+.brand-gradient {
+  background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-end) 100%);
+}
+.brand-gradient-text {
+  background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-end) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.brand-gradient-soft {
+  background: linear-gradient(135deg, #FFF7ED 0%, #FFF1F2 100%);
+}
+.brand-glow {
+  box-shadow: 0 10px 30px -5px rgba(249,115,22,0.35);
+}
+.brand-border { border-color: #FDBA74; }
 
 /* ─── Glass ─────────────────────────────────────────── */
 .glass-panel {
   background: rgba(255,255,255,0.92);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(226,232,240,0.9);
+  border: 1px solid rgba(253,186,116,0.4);
 }
 .glass-panel-dark {
   background: rgba(15,23,42,0.94);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(249,115,22,0.2);
 }
 
-/* ─── Gradients ─────────────────────────────────────── */
-.indigo-gradient { background: linear-gradient(135deg,#4F46E5 0%,#6366F1 100%); }
-.indigo-glow { box-shadow: 0 10px 30px -5px rgba(79,70,229,0.28); }
-
-/* ─── Float ─────────────────────────────────────────── */
+/* ─── Float animations ──────────────────────────────── */
 @keyframes float-slow {
   0%,100% { transform: translateY(0); }
   50%      { transform: translateY(-10px); }
@@ -59,14 +89,7 @@
 }
 .animate-float-med { animation: float-med 4s ease-in-out infinite; }
 
-/* ─── Pulse subtle ──────────────────────────────────── */
-@keyframes pulse-subtle {
-  0%,100% { opacity:1; transform:scale(1); }
-  50%      { opacity:.85; transform:scale(1.025); }
-}
-.animate-pulse-subtle { animation: pulse-subtle 3s ease-in-out infinite; }
-
-/* ─── Gradient sweep (text) ─────────────────────────── */
+/* ─── Gradient text animation ───────────────────────── */
 @keyframes gradient-x {
   0%,100% { background-position: 0% 50%; }
   50%      { background-position: 100% 50%; }
@@ -76,38 +99,14 @@
   animation: gradient-x 4s ease infinite;
 }
 
-/* ─── Shimmer skeleton ──────────────────────────────── */
-@keyframes shimmer {
-  0%   { background-position: -600px 0; }
-  100% { background-position: 600px 0; }
-}
-.shimmer {
-  background: linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);
-  background-size: 600px 100%;
-  animation: shimmer 1.6s infinite;
-}
-
-/* ─── Card hover ────────────────────────────────────── */
-.card-hover {
-  transition: transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s cubic-bezier(.16,1,.3,1);
-}
-.card-hover:hover {
-  transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 20px 40px -10px rgba(15,23,42,.1);
-}
-
-/* ─── Glow ring on active ───────────────────────────── */
-.ring-glow { box-shadow: 0 0 0 3px rgba(99,102,241,.35); }
-
-/* ─── Scroll-reveal (JS adds class) ────────────────── */
+/* ─── Scroll-reveal ─────────────────────────────────── */
 .reveal { opacity:0; transform:translateY(32px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
 .reveal.visible { opacity:1; transform:translateY(0); }
 .reveal-left  { opacity:0; transform:translateX(-40px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
 .reveal-left.visible  { opacity:1; transform:translateX(0); }
-.reveal-right { opacity:0; transform:translateX(40px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
+.reveal-right { opacity:0; transform:translateX(40px);  transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
 .reveal-right.visible { opacity:1; transform:translateX(0); }
 
-/* stagger children */
 .stagger > *:nth-child(1) { transition-delay:.05s; }
 .stagger > *:nth-child(2) { transition-delay:.12s; }
 .stagger > *:nth-child(3) { transition-delay:.19s; }
@@ -116,50 +115,64 @@
 
 /* ─── Typewriter cursor ─────────────────────────────── */
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.cursor-blink::after { content:'|'; animation: blink 1s step-end infinite; margin-left:2px; color:#6366F1; }
+.cursor-blink::after { content:'|'; animation: blink 1s step-end infinite; margin-left:2px; color: var(--brand-orange); }
 
-/* ─── Progress bar fill ─────────────────────────────── */
+/* ─── Bar fill ──────────────────────────────────────── */
 @keyframes bar-fill { from{width:0} }
 .bar-fill { animation: bar-fill .9s cubic-bezier(.16,1,.3,1) forwards; }
 
-/* ─── Counter odometer ──────────────────────────────── */
-@keyframes count-up { from{transform:translateY(100%)} to{transform:translateY(0)} }
-.count-up { animation: count-up .6s cubic-bezier(.16,1,.3,1) forwards; }
-
-/* ─── Orbit dots (hero bg) ──────────────────────────── */
-@keyframes orbit {
-  from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
-  to   { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+/* ─── Card hover ────────────────────────────────────── */
+.card-hover {
+  transition: transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s cubic-bezier(.16,1,.3,1);
 }
-.orbit-dot { animation: orbit linear infinite; }
+.card-hover:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 40px -10px rgba(249,115,22,.12);
+}
 
-/* ─── Ticker / marquee ──────────────────────────────── */
+/* ─── Neon glow (brand) ─────────────────────────────── */
+@keyframes neon-pulse {
+  0%,100% { box-shadow: 0 0 10px 3px rgba(249,115,22,.45), 0 4px 20px rgba(249,115,22,.25); }
+  50%      { box-shadow: 0 0 22px 7px rgba(244,63,94,.65), 0 4px 28px rgba(244,63,94,.30); }
+}
+.neon-pulse { animation: neon-pulse 2.5s ease-in-out infinite; }
+
+/* ─── Slide up ──────────────────────────────────────── */
+@keyframes slide-up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.slide-up { animation: slide-up .4s cubic-bezier(.16,1,.3,1) forwards; }
+
+/* ─── Marquee ───────────────────────────────────────── */
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 .marquee-track { animation: marquee 22s linear infinite; }
 .marquee-track:hover { animation-play-state: paused; }
 
-/* ─── Waveform bars ─────────────────────────────────── */
+/* ─── Waveform ──────────────────────────────────────── */
 @keyframes wave {
   0%,100% { height: 8px; }
   50%      { height: 32px; }
 }
 .wave-bar { animation: wave .8s ease-in-out infinite; }
 
-/* ─── Neon border glow ──────────────────────────────── */
-@keyframes neon-pulse {
-  0%,100% { box-shadow: 0 0 8px 2px rgba(99,102,241,.4); }
-  50%      { box-shadow: 0 0 20px 6px rgba(99,102,241,.7); }
-}
-.neon-pulse { animation: neon-pulse 2.5s ease-in-out infinite; }
-
-/* ─── Slide in from bottom ──────────────────────────── */
-@keyframes slide-up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-.slide-up { animation: slide-up .4s cubic-bezier(.16,1,.3,1) forwards; }
-
 /* ─── Carousel ──────────────────────────────────────── */
 .carousel-track { transition: transform .5s cubic-bezier(.16,1,.3,1); }
 
-/* ─── Tooltip ───────────────────────────────────────── */
-.tooltip { position:relative; }
-.tooltip:hover .tooltip-box { opacity:1; pointer-events:auto; transform:translateY(0); }
-.tooltip-box { opacity:0; pointer-events:none; transform:translateY(4px); transition:.2s; }
+/* ─── Phone screenshot frame ────────────────────────── */
+.phone-shadow {
+  box-shadow: 0 40px 80px -20px rgba(249,115,22,.25), 0 0 0 1px rgba(249,115,22,.1);
+}
+
+/* ─── Pulse subtle ──────────────────────────────────── */
+@keyframes pulse-subtle {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.85; transform:scale(1.025); }
+}
+.animate-pulse-subtle { animation: pulse-subtle 3s ease-in-out infinite; }
+
+/* ─── Screenshot tilt hover ─────────────────────────── */
+.screenshot-card {
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease;
+}
+.screenshot-card:hover {
+  transform: translateY(-8px) rotate(-1deg) scale(1.02);
+  box-shadow: 0 30px 60px -15px rgba(249,115,22,.2);
+}

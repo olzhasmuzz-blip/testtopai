@@ -3,8 +3,8 @@ import { Language } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { ProblemSection } from './components/ProblemSection';
-import { MarketSection } from './components/MarketSection';
-import { WhyNowSection } from './components/WhyNowSection';
+import { StudentShowcaseSection } from './components/StudentShowcaseSection';
+import { HowItWorksSection } from './components/HowItWorksSection';
 import { SolutionSection } from './components/SolutionSection';
 import { ModulesSection } from './components/ModulesSection';
 import { PositioningSection } from './components/PositioningSection';
@@ -53,11 +53,17 @@ export default function App() {
         {/* Section 2: Problem & Flaws of Legacy Tutoring */}
         <ProblemSection lang={lang} />
 
-        {/* Section 3: Market Opportunity & TAM ($2.4B) */}
-        <MarketSection lang={lang} />
+        {/* Section 3: Platform Showcase for Students (real screenshots) */}
+        <StudentShowcaseSection
+          lang={lang}
+          onOpenTestModal={() => setIsTestModalOpen(true)}
+        />
 
-        {/* Section 4: Why Now — 4 Converging Technologies */}
-        <WhyNowSection lang={lang} />
+        {/* Section 4: How It Works — 4-step student journey */}
+        <HowItWorksSection
+          lang={lang}
+          onOpenTestModal={() => setIsTestModalOpen(true)}
+        />
 
         {/* Section 5: Closed-Loop AI Learning Engine */}
         <SolutionSection lang={lang} />
