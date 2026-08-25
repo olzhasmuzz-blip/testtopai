@@ -1,4 +1,4 @@
-export type Language = 'ru' | 'en';
+export type Language = 'ru' | 'en' | 'kz';
 
 export interface NavItem {
   id: string;

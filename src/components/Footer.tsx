@@ -49,19 +49,13 @@ export const Footer: React.FC<FooterProps> = ({ lang, setLang, onOpenTestModal }
                 : "The world's first autonomous AI-driven global exam preparation engine. Real-time feedback and adaptive training for IELTS, TOEIC, SAT & TOEFL."}
             </p>
 
-            <div className="flex items-center gap-3 pt-2">
-              <button
-                onClick={() => setLang('ru')}
-                className={`px-3 py-1 text-xs rounded-lg font-bold font-mono transition-all ${
-                  lang === 'ru' ? 'brand-gradient text-white' : 'bg-slate-800 text-slate-400 hover:text-white'
-                }`}
-              >Русский</button>
-              <button
-                onClick={() => setLang('en')}
-                className={`px-3 py-1 text-xs rounded-lg font-bold font-mono transition-all ${
-                  lang === 'en' ? 'brand-gradient text-white' : 'bg-slate-800 text-slate-400 hover:text-white'
-                }`}
-              >English</button>
+            <div className="flex items-center gap-2 pt-2">
+              {(['ru', 'kz', 'en'] as const).map(l => (
+                <button key={l} onClick={() => setLang(l)}
+                  className={`px-3 py-1 text-xs rounded-lg font-bold font-mono uppercase transition-all ${
+                    lang === l ? 'brand-gradient text-white' : 'bg-slate-800 text-slate-400 hover:text-white'
+                  }`}>{l === 'ru' ? 'Русский' : l === 'kz' ? 'Қазақша' : 'English'}</button>
+              ))}
             </div>
           </div>
 

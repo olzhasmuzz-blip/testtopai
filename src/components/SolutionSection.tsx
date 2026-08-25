@@ -125,7 +125,9 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ lang }) => {
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                      <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">Closed-Loop AI Process</span>
+                      <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                        {lang === 'ru' ? 'Замкнутый AI-процесс' : lang === 'kz' ? 'Тұйық AI-процесс' : 'Closed-Loop AI Process'}
+                      </span>
                     </div>
                     <button onClick={() => setPlaying(!playing)}
                       className="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-mono font-bold text-slate-300 flex items-center gap-1.5 hover:bg-slate-700 transition-all cursor-pointer">

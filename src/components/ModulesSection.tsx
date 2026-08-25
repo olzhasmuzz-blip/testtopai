@@ -102,7 +102,9 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
               </div>
             </div>
             <div className="p-6 space-y-4">
-              <p className="text-xs text-slate-400 font-mono uppercase tracking-wider font-bold">Official IELTS Module Specification</p>
+              <p className="text-xs text-slate-400 font-mono uppercase tracking-wider font-bold">
+                {lang === 'ru' ? 'Официальная спецификация модуля IELTS' : lang === 'kz' ? 'IELTS модулінің ресми сипаттамасы' : 'Official IELTS Module Specification'}
+              </p>
               <div className="space-y-2.5">
                 {skill.capabilities.map((cap, i) => (
                   <div key={i} className="flex items-start gap-2.5 text-sm text-slate-700">
@@ -127,16 +129,20 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
           <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 shadow-lg p-6 sm:p-8 reveal-right">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
               <div>
-                <span className="text-[10px] font-bold text-orange-600 uppercase tracking-wider bg-orange-50 border border-orange-200 px-2.5 py-0.5 rounded-md font-mono">Live Interactive Demo</span>
-                <h4 className="text-base sm:text-lg font-extrabold text-slate-900 mt-1 font-display">{lang === 'ru' ? 'AI-проверка прямо здесь' : 'Live AI Evaluation Sandbox'}</h4>
+                <span className="text-[10px] font-bold text-orange-600 uppercase tracking-wider bg-orange-50 border border-orange-200 px-2.5 py-0.5 rounded-md font-mono">
+                  {lang === 'ru' ? 'Интерактивное демо' : lang === 'kz' ? 'Интерактивті демо' : 'Live Interactive Demo'}
+                </span>
+                <h4 className="text-base sm:text-lg font-extrabold text-slate-900 mt-1 font-display">{lang === 'ru' ? 'AI-проверка прямо здесь' : lang === 'kz' ? 'AI-тексеру дәл осында' : 'Live AI Evaluation Sandbox'}</h4>
               </div>
-              <span className="text-xs font-mono text-slate-400 hidden sm:inline">Cambridge Rubric v4.2</span>
+              <span className="text-xs font-mono text-slate-400 hidden sm:inline">
+                {lang === 'ru' ? 'Критерии Cambridge v4.2' : lang === 'kz' ? 'Cambridge критерийлері v4.2' : 'Cambridge Rubric v4.2'}
+              </span>
             </div>
 
             {selected === 'speaking' ? (
               <div className="space-y-4">
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                  <p className="text-xs font-bold text-slate-700 mb-2">{lang === 'ru' ? 'Speaking Part 2 — Анализ речи в реальном времени' : 'Speaking Part 2 – Real-Time Voice Analyzer'}</p>
+                  <p className="text-xs font-bold text-slate-700 mb-2">{lang === 'ru' ? 'Speaking Part 2 — Анализ речи в реальном времени' : lang === 'kz' ? 'Speaking Part 2 — Сөйлеуді нақты уақытта талдау' : 'Speaking Part 2 – Real-Time Voice Analyzer'}</p>
                   <p className="text-xs text-slate-500 italic">"Describe an interesting tradition in your home country and explain why it is significant."</p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center gap-4 p-4 bg-white rounded-xl border border-slate-200">
@@ -144,7 +150,7 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
                     className={`px-5 py-3 rounded-2xl font-bold text-xs flex items-center gap-2.5 transition-all cursor-pointer
                       ${isRecording ? 'bg-rose-600 text-white animate-pulse shadow-lg' : 'brand-gradient text-white brand-glow'}`}>
                     <Mic className="w-4 h-4" />
-                    {isRecording ? (lang === 'ru' ? 'Слушаю...' : 'Recording...') : (lang === 'ru' ? 'Записать ответ' : 'Test Speaking')}
+                    {isRecording ? (lang === 'ru' ? 'Слушаю...' : lang === 'kz' ? 'Тыңдап тұрмын...' : 'Recording...') : (lang === 'ru' ? 'Записать ответ' : lang === 'kz' ? 'Жауап жазу' : 'Test Speaking')}
                   </button>
                   {isRecording ? (
                     <div className="flex items-end gap-1 h-8">
@@ -164,7 +170,7 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
               </div>
             ) : (
               <div className="space-y-4">
-                <label className="text-xs font-bold text-slate-700">{lang === 'ru' ? 'Введите текст эссе или параграф:' : 'Enter essay or paragraph sample:'}</label>
+                <label className="text-xs font-bold text-slate-700">{lang === 'ru' ? 'Введите текст эссе или параграф:' : lang === 'kz' ? 'Эссе немесе параграф мәтінін енгізіңіз:' : 'Enter essay or paragraph sample:'}</label>
                 <textarea value={essay} onChange={e => setEssay(e.target.value)} rows={4}
                   className="w-full p-3.5 text-sm rounded-xl border border-slate-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none text-slate-800 bg-slate-50/50 resize-none transition-all" />
                 <div className="flex items-center justify-between">
@@ -172,7 +178,7 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
                   <button onClick={handleAnalyze} disabled={analyzing}
                     className="px-5 py-2.5 rounded-xl brand-gradient text-white font-bold text-xs flex items-center gap-2 cursor-pointer disabled:opacity-50 transition-all brand-glow">
                     <Sparkles className={`w-3.5 h-3.5 ${analyzing ? 'animate-spin' : ''}`} />
-                    {analyzing ? (lang === 'ru' ? 'Анализирую...' : 'Analyzing...') : (lang === 'ru' ? 'Оценить за 2 сек' : 'Evaluate in 2s')}
+                    {analyzing ? (lang === 'ru' ? 'Анализирую...' : lang === 'kz' ? 'Талдап жатырмын...' : 'Analyzing...') : (lang === 'ru' ? 'Оценить за 2 сек' : lang === 'kz' ? '2 секундта бағалау' : 'Evaluate in 2s')}
                   </button>
                 </div>
                 {result && (
@@ -208,18 +214,20 @@ export const ModulesSection: React.FC<ModulesSectionProps> = ({ lang, onOpenTest
                 <Zap className="w-4 h-4" />
                 <span className="text-xs font-bold uppercase tracking-wider font-mono">{t.modules.aiLayerTitle}</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-white font-display">{lang === 'ru' ? '4 фундаментальные AI-возможности' : '4 Core Algorithmic Capabilities'}</h3>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-white font-display">{lang === 'ru' ? '4 фундаментальные AI-возможности' : lang === 'kz' ? '4 іргелі AI-мүмкіндік' : '4 Core Algorithmic Capabilities'}</h3>
             </div>
-            <span className="px-3 py-1 bg-white/10 text-slate-300 rounded-full text-xs font-mono self-start">Universal ML Architecture</span>
+            <span className="px-3 py-1 bg-white/10 text-slate-300 rounded-full text-xs font-mono self-start">
+              {lang === 'ru' ? 'Универсальная ML-архитектура' : lang === 'kz' ? 'Әмбебап ML-архитектура' : 'Universal ML Architecture'}
+            </span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {aiIntelligenceLayers.map((layer, i) => (
               <div key={layer.id} className="p-4 rounded-2xl bg-slate-800/60 border border-slate-700 hover:border-orange-500/60 transition-colors card-hover" style={{ transitionDelay: `${i * 0.06}s` }}>
                 <h4 className="font-bold text-sm text-white mb-1.5 flex items-center gap-2 font-display">
                   <CheckCircle2 className="w-4 h-4 text-orange-400 shrink-0" />
-                  {lang === 'ru' ? layer.nameRu : layer.nameEn}
+                  {lang === 'ru' ? layer.nameRu : lang === 'kz' ? layer.nameRu : layer.nameEn}
                 </h4>
-                <p className="text-xs text-slate-400 leading-relaxed">{lang === 'ru' ? layer.descRu : layer.descEn}</p>
+                <p className="text-xs text-slate-400 leading-relaxed">{lang === 'ru' ? layer.descRu : lang === 'kz' ? layer.descRu : layer.descEn}</p>
               </div>
             ))}
           </div>

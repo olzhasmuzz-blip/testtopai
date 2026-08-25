@@ -160,46 +160,6 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onOpenTest
           </div>
         )}
 
-        {/* Unit economics */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 reveal" style={{ transitionDelay: '.26s' }}>
-          <div className="bg-white p-7 rounded-3xl border border-slate-200 shadow-sm text-left">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-5">
-              <h4 className="font-extrabold text-base text-slate-900 font-display">{t.pricing.unitTitle}</h4>
-              <span className="text-xs font-mono font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">80–90% Gross Margin</span>
-            </div>
-            <div className="grid grid-cols-3 gap-4 text-center mb-4">
-              {[{ val: '$0.01', label: 'Marginal Cost', color: 'text-slate-900' }, { val: '85%', label: 'Gross Margin', color: 'text-emerald-600' }, { val: '100x', label: 'Scalability', color: 'text-orange-600' }].map(s => (
-                <div key={s.label} className="p-3 bg-slate-50 rounded-2xl">
-                  <span className={`text-2xl font-black font-display block ${s.color}`}>{s.val}</span>
-                  <span className="text-[10px] text-slate-500 font-mono">{s.label}</span>
-                </div>
-              ))}
-            </div>
-            <div className="p-3 bg-orange-50/60 rounded-xl border border-orange-100 flex items-center justify-between text-xs">
-              <span className="font-bold text-slate-800">LTV / CAC Ratio</span>
-              <span className="font-mono font-black text-emerald-600 text-sm">3.5×</span>
-            </div>
-          </div>
-          <div className="bg-white p-7 rounded-3xl border border-slate-200 shadow-sm text-left">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-5">
-              <h4 className="font-extrabold text-base text-slate-900 font-display">{t.pricing.expansionTitle}</h4>
-              <span className="text-xs font-mono font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">B2C → B2B</span>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { title: 'B2C Core', sub: lang === 'ru' ? 'Прямые продажи студентам' : 'Direct to students worldwide' },
-                { title: 'B2B Schools', sub: lang === 'ru' ? 'Языковые школы-партнёры' : 'Institutional language partners' },
-                { title: 'Test Centers', sub: lang === 'ru' ? 'Стратегические альянсы' : 'Strategic preparation alliances' },
-                { title: 'Global Scale', sub: lang === 'ru' ? 'Быстрое международное расширение' : 'Rapid international expansion' },
-              ].map(s => (
-                <div key={s.title} className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 hover:border-orange-200 transition-colors">
-                  <h5 className="font-bold text-sm text-slate-900 font-display">{s.title}</h5>
-                  <p className="text-xs text-slate-500 mt-0.5">{s.sub}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
