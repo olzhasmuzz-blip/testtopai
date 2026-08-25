@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Language } from '../types';
 import {
   ArrowRight, CheckCircle2, Zap, TrendingUp,
-  BookOpen, Headphones, Mic, PenLine,
 } from 'lucide-react';
 
 interface HowItWorksSectionProps {
@@ -96,13 +95,6 @@ const STEPS_EN = [
   },
 ];
 
-const SKILLS_RU = [
-  { icon: <BookOpen className="w-5 h-5" />, label: 'Reading', color: '#059669', bg: '#D1FAE5' },
-  { icon: <Headphones className="w-5 h-5" />, label: 'Listening', color: '#3B82F6', bg: '#DBEAFE' },
-  { icon: <PenLine className="w-5 h-5" />, label: 'Writing', color: '#F97316', bg: '#FFEDD5' },
-  { icon: <Mic className="w-5 h-5" />, label: 'Speaking', color: '#F43F5E', bg: '#FFE4E6' },
-];
-
 const STATS_RU = [
   { value: '2,500+', label: 'Активных учеников' },
   { value: '85%', label: 'Возвращаются каждый день' },
@@ -180,20 +172,9 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ lang, onOp
           </h2>
           <p className="reveal text-slate-500 text-base leading-relaxed" style={{ transitionDelay: '.14s' }}>
             {lang === 'ru'
-              ? 'Никакой теории ради теории. Только практика, AI-разбор ошибок и реальный рост балла.'
-              : 'No fluff, no passive theory. Just focused practice, AI error analysis and measurable score growth.'}
+              ? 'Никакой перегруженной графики. Только понятный путь, реальные экраны и фото живого учебного процесса.'
+              : 'No cluttered visuals. Just a clear path, real screens, and photos from actual study moments.'}
           </p>
-
-          {/* skill pills */}
-          <div className="reveal flex items-center justify-center gap-3 flex-wrap pt-2" style={{ transitionDelay: '.18s' }}>
-            {SKILLS_RU.map(s => (
-              <div key={s.label}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold"
-                style={{ backgroundColor: s.bg, color: s.color }}>
-                {s.icon} {s.label}
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* ── Main interactive grid ── */}
@@ -201,6 +182,25 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ lang, onOp
 
           {/* Left — step selector list */}
           <div className="lg:col-span-5 space-y-3 reveal-left">
+            <div className="grid grid-cols-4 gap-2 mb-3">
+              {steps.map((s, i) => (
+                <button
+                  key={s.num}
+                  onClick={() => pick(i)}
+                  className={`relative rounded-2xl overflow-hidden border transition-all duration-300 aspect-[3/4]
+                    ${activeStep === i ? 'border-orange-400 shadow-lg shadow-orange-100 scale-[1.02]' : 'border-slate-200 hover:border-orange-200 opacity-85 hover:opacity-100'}`}
+                >
+                  <img src={s.screenshot} alt={s.title} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/10 to-transparent" />
+                  <div className="absolute left-2 right-2 bottom-2">
+                    <span className="inline-flex px-2 py-0.5 rounded-md bg-white/90 text-[9px] font-bold uppercase tracking-wider text-slate-700">
+                      {s.tag}
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+
             {steps.map((s, i) => {
               const isActive = activeStep === i;
               return (
