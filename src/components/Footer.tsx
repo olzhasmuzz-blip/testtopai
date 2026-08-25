@@ -1,13 +1,24 @@
 import React from 'react';
 import { Language } from '../types';
 import { translations } from '../data/content';
-import { Sparkles, Shield, FileCheck } from 'lucide-react';
+import { Sparkles, Shield, FileCheck, ExternalLink } from 'lucide-react';
 
 interface FooterProps {
   lang: Language;
   setLang: (l: Language) => void;
   onOpenTestModal: () => void;
 }
+
+const DOCS = [
+  { file: '06_Opisanie_produkta.pdf',          ru: 'Описание продукта',              en: 'Product Description' },
+  { file: '07_1_Publichnaya_oferta.pdf',        ru: 'Публичная оферта',               en: 'Public Offer Agreement' },
+  { file: '07_2_Politika_konfidentsialnosti.pdf', ru: 'Политика конфиденциальности', en: 'Privacy Policy' },
+  { file: '07_3_Politika_vozvrata.pdf',          ru: 'Политика возврата',             en: 'Refund Policy' },
+  { file: '07_4_Protsedura_oplaty.pdf',          ru: 'Процедура оплаты',              en: 'Payment Procedure' },
+  { file: '07_5_Sroki_sposoby_polucheniya.pdf',  ru: 'Сроки и способы получения',     en: 'Delivery Terms' },
+  { file: '07_6_Khranenie_dokumentov.pdf',       ru: 'Хранение документов',           en: 'Document Storage' },
+  { file: '07_7_Zashchita_dannykh.pdf',          ru: 'Защита данных',                 en: 'Data Protection' },
+];
 
 export const Footer: React.FC<FooterProps> = ({ lang, setLang, onOpenTestModal }) => {
   const t = translations[lang];
@@ -20,7 +31,6 @@ export const Footer: React.FC<FooterProps> = ({ lang, setLang, onOpenTestModal }
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              {/* logo icon matching brand */}
               <div className="w-10 h-10 rounded-xl brand-gradient flex items-center justify-center shadow-lg brand-glow shrink-0">
                 <svg viewBox="0 0 40 40" className="w-7 h-7" fill="none">
                   <circle cx="20" cy="20" r="12" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="60 10" />
@@ -42,73 +52,69 @@ export const Footer: React.FC<FooterProps> = ({ lang, setLang, onOpenTestModal }
             <div className="flex items-center gap-3 pt-2">
               <button
                 onClick={() => setLang('ru')}
-                className={`px-3 py-1 text-xs rounded-lg font-bold font-mono transition-colors ${
+                className={`px-3 py-1 text-xs rounded-lg font-bold font-mono transition-all ${
                   lang === 'ru' ? 'brand-gradient text-white' : 'bg-slate-800 text-slate-400 hover:text-white'
                 }`}
-              >
-                Русский
-              </button>
+              >Русский</button>
               <button
                 onClick={() => setLang('en')}
-                className={`px-3 py-1 text-xs rounded-lg font-bold font-mono transition-colors ${
+                className={`px-3 py-1 text-xs rounded-lg font-bold font-mono transition-all ${
                   lang === 'en' ? 'brand-gradient text-white' : 'bg-slate-800 text-slate-400 hover:text-white'
                 }`}
-              >
-                English
-              </button>
+              >English</button>
             </div>
           </div>
 
-          {/* Nav Col 1: Sections */}
+          {/* Nav Col 1 */}
           <div className="space-y-3 text-xs">
             <h4 className="font-bold text-slate-200 uppercase tracking-wider font-mono text-[11px]">
               {lang === 'ru' ? 'Платформа' : 'Platform'}
             </h4>
             <ul className="space-y-2 text-slate-400">
               <li><a href="#problem" className="hover:text-white transition-colors">{t.nav.problem}</a></li>
-              <li><a href="#app-showcase" className="hover:text-white transition-colors">{lang === 'ru' ? 'Платформа' : 'App Showcase'}</a></li>
+              <li><a href="#app-showcase" className="hover:text-white transition-colors">{lang === 'ru' ? 'Скриншоты' : 'App Showcase'}</a></li>
               <li><a href="#how-it-works" className="hover:text-white transition-colors">{lang === 'ru' ? 'Как работает' : 'How It Works'}</a></li>
               <li><a href="#system" className="hover:text-white transition-colors">{t.nav.system}</a></li>
               <li><a href="#modules" className="hover:text-white transition-colors">{t.nav.modules}</a></li>
-            </ul>
-          </div>
-
-          {/* Nav Col 2: Plans */}
-          <div className="space-y-3 text-xs">
-            <h4 className="font-bold text-slate-200 uppercase tracking-wider font-mono text-[11px]">
-              {lang === 'ru' ? 'Тарифы & Результаты' : 'Plans & Results'}
-            </h4>
-            <ul className="space-y-2 text-slate-400">
-              <li><a href="#traction" className="hover:text-white transition-colors">{t.nav.traction}</a></li>
               <li><a href="#pricing" className="hover:text-white transition-colors">{t.nav.pricing}</a></li>
-              <li><a href="#roadmap" className="hover:text-white transition-colors">{t.nav.roadmap}</a></li>
               <li>
-                <button
-                  onClick={onOpenTestModal}
-                  className="text-orange-400 hover:text-orange-300 hover:underline font-semibold cursor-pointer transition-colors"
-                >
-                  {lang === 'ru' ? 'Пройти AI-тест' : 'Take AI Test'}
-                </button>
+                <a href="https://testtop.app/" target="_blank" rel="noopener noreferrer"
+                  className="text-orange-400 hover:text-orange-300 font-semibold transition-colors flex items-center gap-1">
+                  {lang === 'ru' ? 'Открыть платформу' : 'Open Platform'}
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* Nav Col 3: Legal & Trust */}
-          <div className="space-y-3 text-xs">
+          {/* Nav Col 2 — Legal docs */}
+          <div className="space-y-3 text-xs lg:col-span-2">
             <h4 className="font-bold text-slate-200 uppercase tracking-wider font-mono text-[11px]">
-              Security & Legal
+              {lang === 'ru' ? 'Документы' : 'Legal Documents'}
             </h4>
-            <ul className="space-y-2 text-slate-400">
-              <li className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-emerald-400" /> SSL 256-bit Encryption</li>
-              <li className="flex items-center gap-1.5"><FileCheck className="w-3.5 h-3.5 text-blue-400" /> GDPR & Privacy Compliant</li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Security Architecture</a></li>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-slate-400">
+              {DOCS.map(doc => (
+                <li key={doc.file}>
+                  <a
+                    href={`/docs/${doc.file}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors flex items-center gap-1 group"
+                  >
+                    <FileCheck className="w-3 h-3 text-slate-600 group-hover:text-orange-400 transition-colors shrink-0" />
+                    {lang === 'ru' ? doc.ru : doc.en}
+                  </a>
+                </li>
+              ))}
+              <li className="flex items-center gap-1.5 mt-1">
+                <Shield className="w-3.5 h-3.5 text-emerald-400" />
+                <span>SSL 256-bit · GDPR Compliant</span>
+              </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom CTA strip */}
+        {/* CTA strip */}
         <div className="py-8 border-b border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <p className="font-black text-lg font-display text-white">
@@ -118,20 +124,20 @@ export const Footer: React.FC<FooterProps> = ({ lang, setLang, onOpenTestModal }
               {lang === 'ru' ? '5 минут — и ты знаешь свой уровень' : '5 minutes — and you know your level'}
             </p>
           </div>
-          <button
-            onClick={onOpenTestModal}
+          <a
+            href="https://testtop.app/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="brand-gradient text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2 brand-glow hover:opacity-90 transition-all active:scale-95 shrink-0"
           >
             <Sparkles className="w-4 h-4" />
             {t.nav.startFree}
-          </button>
+          </a>
         </div>
 
-        {/* Bottom Disclaimer & Copyright */}
+        {/* Copyright */}
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>
-            © 2026 TestTop AI Inc. All rights reserved.
-          </p>
+          <p>© 2026 TestTop AI Inc. All rights reserved.</p>
           <p className="text-[11px] text-slate-600 max-w-xl text-center md:text-right">
             Disclaimer: IELTS is a registered trademark of University of Cambridge ESOL, the British Council, and IDP Education Australia. TestTop AI is an independent preparation system not affiliated with Cambridge Assessment.
           </p>
