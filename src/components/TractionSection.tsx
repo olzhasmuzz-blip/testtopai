@@ -1,14 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  translations,
-  tractionMetrics,
-  userEngagementStats,
-  aiEngineStats,
-  testimonials,
-  liveFeedActivities,
-} from '../data/content';
+import { translations, tractionMetrics, testimonials, liveFeedActivities } from '../data/content';
 import { Language } from '../types';
-import { Star, ChevronLeft, ChevronRight, GraduationCap } from 'lucide-react';
+import { TrendingUp, Users, Bot, CheckCircle, Star, GraduationCap, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface TractionSectionProps { lang: Language; }
 
@@ -28,11 +21,17 @@ function useCounter(target: number, running: boolean, duration = 1400) {
   return val;
 }
 
-const TRACTION_PHOTOS = [
-  'https://info.writetheworld.org/hs-fs/hubfs/images/20250415_1319_Focused%20Student%20Writing_simple_compose_01jrxhnc0hfbpbgxyqdexbyfzt.png?height=606&name=20250415_1319_Focused%20Student%20Writing_simple_compose_01jrxhnc0hfbpbgxyqdexbyfzt.png&width=909',
-  'https://www.magdeburg-studium.de/onlinemagazin_media/Beitragsfotos/2024/Studentin%2Barbeitet%2Bin%2Bder%2BBibliothek%2Bam%2BLaptop%2B%28c%29%2BJana%2BD%C3%BCnnhaupt%2BUni%2BMagdeburg-height-560-width-1000.jpg',
-  'https://www.emma.nl/sites/www.emma.nl/files/2021-08/vrouw-studeren-laptop-closeup.jpg',
-  'https://inscription.una.bj/build/assets/focus-f6461e2e.jpg',
+const METRIC_ICONS: Record<string, React.ReactNode> = {
+  Users: <Users className="w-5 h-5 text-rose-600" />,
+  TrendingUp: <TrendingUp className="w-5 h-5 text-orange-600" />,
+  Bot: <Bot className="w-5 h-5 text-emerald-600" />,
+  CheckCircle: <CheckCircle className="w-5 h-5 text-amber-600" />,
+};
+
+const SUCCESS_IMAGES = [
+  '/success-stories/candidate-01.png',
+  '/success-stories/candidate-02.png',
+  '/success-stories/candidate-03.png',
 ];
 
 export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
@@ -67,171 +66,126 @@ export const TractionSection: React.FC<TractionSectionProps> = ({ lang }) => {
 
   const countVals = [2500, 85, 92, 78];
   const suffixes = ['+', '%', '%', '%'];
-  const counts = [
-    useCounter(countVals[0], counting),
-    useCounter(countVals[1], counting),
-    useCounter(countVals[2], counting),
-    useCounter(countVals[3], counting),
-  ];
+  const c0 = useCounter(countVals[0], counting);
+  const c1 = useCounter(countVals[1], counting);
+  const c2 = useCounter(countVals[2], counting);
+  const c3 = useCounter(countVals[3], counting);
+  const counts = [c0, c1, c2, c3];
 
   return (
-    <section id="traction" ref={sectionRef} className="py-20 md:py-28 bg-[#FCFBF8] relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none opacity-[0.35]"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(15,23,42,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.03) 1px, transparent 1px)',
-          backgroundSize: '44px 44px',
-        }} />
+    <section id="traction" ref={sectionRef} className="py-20 md:py-28 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
           <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold uppercase tracking-wider">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            {t.traction.sectionTag}
+            <TrendingUp className="w-3.5 h-3.5" />{t.traction.sectionTag}
           </div>
-          <h2 className="reveal text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display" style={{ transitionDelay: '.08s' }}>
-            {t.traction.title}
-          </h2>
-          <p className="reveal text-slate-500 text-base" style={{ transitionDelay: '.14s' }}>
-            {t.traction.subtitle}
-          </p>
+          <h2 className="reveal text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display" style={{ transitionDelay: '.08s' }}>{t.traction.title}</h2>
+          <p className="reveal text-slate-500 text-base" style={{ transitionDelay: '.14s' }}>{t.traction.subtitle}</p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-12 reveal stagger" style={{ transitionDelay: '.18s' }}>
-          {TRACTION_PHOTOS.map((src, i) => (
-            <div key={i} className="rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm">
-              <img src={src} alt="" className="w-full h-40 object-cover" referrerPolicy="no-referrer" />
-              <div className="p-4">
-                <p className="text-xs uppercase tracking-wider text-slate-400 font-mono font-bold">
-                  {lang === 'ru' ? 'Живая подготовка' : 'Real study moment'}
-                </p>
-                <p className="text-sm font-semibold text-slate-800 mt-1 leading-snug">
-                  {lang === 'ru'
-                    ? 'Учебная сцена без стерильного визуального шума'
-                    : 'A study scene without sterile visual noise'}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div ref={countersRef} className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12 reveal stagger" style={{ transitionDelay: '.2s' }}>
+        {/* Animated counter metrics */}
+        <div ref={countersRef} className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12 reveal stagger" style={{ transitionDelay: '.18s' }}>
           {tractionMetrics.map((m, i) => (
-            <div key={i} className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm text-left card-hover overflow-hidden">
-              <div className="h-24 rounded-2xl overflow-hidden mb-4">
-                <img src={TRACTION_PHOTOS[i % TRACTION_PHOTOS.length]} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <div key={i} className="bg-slate-50 p-6 rounded-3xl border border-slate-200 hover:border-orange-300 transition-all card-hover text-left">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-200 flex items-center justify-center">{METRIC_ICONS[m.iconName]}</div>
+                <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full font-mono">{m.trend}</span>
               </div>
               <div className="text-3xl sm:text-4xl font-black text-slate-900 font-display font-mono" style={{ fontVariantNumeric: 'tabular-nums' }}>
                 {i === 0 ? `${counts[i].toLocaleString()}${suffixes[i]}` : `${counts[i]}${suffixes[i]}`}
               </div>
               <h4 className="font-extrabold text-sm text-slate-800 mt-1 font-display">{m.label}</h4>
-              <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-slate-200">{m.subtext}</p>
+              <p className="text-xs text-slate-400 mt-3 pt-3 border-t border-slate-200 font-mono">{m.subtext}</p>
             </div>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 mb-12">
-          <div className="bg-white p-7 rounded-3xl border border-slate-200 shadow-sm reveal-left">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
-              <h3 className="font-extrabold text-lg text-slate-900 font-display">
-                {lang === 'ru' ? 'Вовлечённость пользователей' : 'User Engagement'}
-              </h3>
-              <span className="text-xs font-mono font-bold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-lg">
-                Last 30 days
-              </span>
-            </div>
-            <div className="space-y-3">
-              {userEngagementStats.map((stat, i) => (
-                <div key={i} className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-orange-200 transition-colors">
-                  <span className="text-sm font-semibold text-slate-700">{stat.label}</span>
-                  <span className="font-mono font-black text-base text-slate-900">{stat.value}</span>
+        {/* Testimonials */}
+        <div className="relative overflow-hidden bg-slate-950 text-white rounded-[2rem] p-6 sm:p-8 lg:p-10 shadow-2xl reveal" style={{ transitionDelay: '.2s' }}>
+          <div className="absolute inset-0 pointer-events-none opacity-70"
+            style={{ background: 'radial-gradient(circle at 18% 18%, rgba(249,115,22,.22), transparent 30%), radial-gradient(circle at 78% 0%, rgba(16,185,129,.16), transparent 28%), linear-gradient(135deg, rgba(15,23,42,.9), rgba(2,6,23,1))' }} />
+          <div className="absolute inset-0 pointer-events-none opacity-30"
+            style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px)', backgroundSize: '44px 44px' }} />
+
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[.06] px-5 pt-6 sm:px-8 lg:px-10 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-end min-h-[360px]">
+              <div className="lg:col-span-5 pb-8">
+                <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-orange-300 uppercase mb-3">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />Студенты довольны
+                </span>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black font-display">Истории успеха выпускников TestTop</h3>
+                <p className="mt-3 max-w-md text-sm text-slate-300 leading-relaxed">Ученики видят понятный прогресс, быстрее закрывают слабые места и увереннее подходят к экзамену.</p>
+                <div className="mt-5 bg-slate-950/60 backdrop-blur border border-white/10 px-4 py-2 rounded-2xl flex items-center gap-2 text-xs font-mono max-w-sm">
+                  <span className="text-lg">{liveFeedActivities[feedIdx].flag}</span>
+                  <span className="font-bold text-slate-200 truncate">{liveFeedActivities[feedIdx].user}</span>
+                  <span className="text-slate-400 truncate">{liveFeedActivities[feedIdx].action}</span>
+                  <span className="font-bold text-emerald-400 shrink-0">{liveFeedActivities[feedIdx].score}</span>
                 </div>
-              ))}
+              </div>
+
+              <div className="relative lg:col-span-7 h-[330px]">
+                <div className="absolute bottom-0 left-[12%] w-48 h-48 rounded-full bg-orange-500/30 blur-3xl" />
+                <div className="absolute bottom-6 right-[14%] w-56 h-56 rounded-full bg-emerald-400/20 blur-3xl" />
+                <img src={SUCCESS_IMAGES[0]} alt="" aria-hidden="true" className="absolute bottom-0 left-[2%] h-[290px] sm:h-[330px] object-contain drop-shadow-[0_30px_45px_rgba(0,0,0,.45)]" />
+                <img src={SUCCESS_IMAGES[1]} alt="" aria-hidden="true" className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[320px] sm:h-[370px] object-contain z-10 drop-shadow-[0_34px_50px_rgba(0,0,0,.5)]" />
+                <img src={SUCCESS_IMAGES[2]} alt="" aria-hidden="true" className="absolute bottom-0 right-[0%] h-[290px] sm:h-[340px] object-contain drop-shadow-[0_30px_45px_rgba(0,0,0,.45)] hidden sm:block" />
+                <div className="absolute left-4 bottom-5 z-20 rounded-2xl bg-white text-slate-950 px-3.5 py-2.5 shadow-xl sm:left-auto sm:right-6 sm:bottom-6">
+                  <div className="text-2xl sm:text-3xl font-black font-display brand-gradient-text">4.9★</div>
+                  <div className="text-[11px] font-bold text-slate-500">оценка студентов</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="bg-white p-7 rounded-3xl border border-slate-200 shadow-sm reveal-right">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
-              <h3 className="font-extrabold text-lg text-slate-900 font-display">
-                {lang === 'ru' ? 'Производительность AI' : 'AI Engine Performance'}
-              </h3>
-              <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg">Real-time</span>
-            </div>
-            <div className="space-y-3">
-              {aiEngineStats.map((stat, i) => (
-                <div key={i} className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-emerald-200 transition-colors">
-                  <span className="text-sm font-semibold text-slate-700">{stat.label}</span>
-                  <span className="font-mono font-black text-base brand-gradient-text">{stat.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-3xl p-7 sm:p-9 shadow-sm border border-slate-200 reveal" style={{ transitionDelay: '.2s' }}>
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-7 border-b border-slate-100 pb-5">
+          <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-              <span className="flex items-center gap-1.5 text-xs font-mono font-bold text-orange-500 uppercase mb-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-400" />Live Student Network
-              </span>
-              <h3 className="text-xl sm:text-2xl font-extrabold font-display text-slate-900">
-                {lang === 'ru' ? 'Истории успеха выпускников TestTop' : 'Verified Candidate Admissions'}
-              </h3>
+              <span className="text-xs font-mono font-bold text-orange-300 uppercase">Отзывы</span>
+              <h4 className="text-xl sm:text-2xl font-extrabold font-display">Что говорят выпускники</h4>
             </div>
-            <div className="bg-slate-50 border border-slate-200 px-4 py-2 rounded-2xl flex items-center gap-2 text-xs font-mono shrink-0 max-w-sm">
-              <span className="text-lg">{liveFeedActivities[feedIdx].flag}</span>
-              <span className="font-bold text-slate-800 truncate">{liveFeedActivities[feedIdx].user}</span>
-              <span className="text-slate-500 truncate">{liveFeedActivities[feedIdx].action}</span>
-              <span className="font-bold text-emerald-600 shrink-0">{liveFeedActivities[feedIdx].score}</span>
-            </div>
+            <div className="text-xs text-slate-400 max-w-md">Короткие истории о том, как фидбек, практика и персональный план помогли выйти на целевой балл.</div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
             {visibleTestimonials.map((item, i) => (
-              <div key={`${tIdx}-${i}`} className="bg-[#FCFBF8] p-5 rounded-2xl border border-slate-200 hover:border-orange-200 transition-colors flex flex-col justify-between card-hover"
+              <div key={`${tIdx}-${i}`} className="bg-slate-800/60 p-5 rounded-2xl border border-slate-700 hover:border-orange-500/70 transition-colors flex flex-col justify-between card-hover"
                 style={{ animation: 'slide-up .4s cubic-bezier(.16,1,.3,1)', animationDelay: `${i * 80}ms`, animationFillMode: 'both' }}>
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="px-2.5 py-1 bg-emerald-500/10 text-emerald-700 rounded-lg text-xs font-bold font-mono">{item.score}</span>
-                    {item.university && (
-                      <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 text-[10px] font-mono font-bold border border-orange-200">
-                        <GraduationCap className="w-3 h-3" />{item.university}
-                      </span>
-                    )}
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <span className="px-2.5 py-1 bg-emerald-500/20 text-emerald-300 rounded-lg text-xs font-bold font-mono">{item.score}</span>
+                  {item.university && (
+                    <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300 text-[10px] font-mono font-bold border border-orange-500/30">
+                      <GraduationCap className="w-3 h-3" />{item.university}
+                    </span>
+                  )}
                   </div>
                   <div className="flex gap-0.5 mb-2">{[...Array(5)].map((_, j) => <Star key={j} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />)}</div>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed italic mb-4">“{item.comment}”</p>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic mb-4">«{item.comment}»</p>
                 </div>
-                <div className="flex items-center gap-3 pt-3 border-t border-slate-200">
-                  <img src={item.avatar} alt={item.name} className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-sm" referrerPolicy="no-referrer" />
+                <div className="flex items-center gap-3 pt-3 border-t border-slate-700">
+                  <img src={item.avatar} alt={item.name} className="w-10 h-10 rounded-full object-cover border-2 border-orange-500/40" referrerPolicy="no-referrer" />
                   <div>
-                    <h5 className="font-bold text-xs text-slate-900 font-display flex items-center gap-1">
-                      {item.name} {item.flag && <span>{item.flag}</span>}
-                    </h5>
-                    <p className="text-[10px] text-slate-500">{item.role}</p>
+                    <h5 className="font-bold text-xs text-white font-display flex items-center gap-1">{item.name} {item.flag && <span>{item.flag}</span>}</h5>
+                    <p className="text-[10px] text-slate-400">{item.role}</p>
                   </div>
-                  <span className="ml-auto text-[10px] text-emerald-700 font-mono font-bold bg-emerald-500/10 px-2 py-0.5 rounded-md shrink-0">
-                    {item.daysToTarget}
-                  </span>
+                  <span className="ml-auto text-[10px] text-emerald-400 font-mono font-bold bg-emerald-500/10 px-2 py-0.5 rounded-md shrink-0">{item.daysToTarget}</span>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="flex items-center justify-center gap-3">
-            <button onClick={() => setTIdx(i => (i - 1 + pages) % pages)} className="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-all">
-              <ChevronLeft className="w-4 h-4 text-slate-700" />
+          <div className="relative flex items-center justify-center gap-3">
+            <button onClick={() => setTIdx(i => (i - 1 + pages) % pages)} className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center hover:bg-white/15 transition-all">
+              <ChevronLeft className="w-4 h-4 text-white" />
             </button>
             {[...Array(pages)].map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setTIdx(i)}
+              <button key={i} onClick={() => setTIdx(i)}
                 className="rounded-full transition-all"
-                style={i === tIdx ? { width: 24, height: 10, background: 'linear-gradient(135deg,#F97316,#F43F5E)' } : { width: 10, height: 10, background: '#E2E8F0' }}
-              />
+                style={i === tIdx ? { width: 24, height: 10, background: 'linear-gradient(135deg,#F97316,#F43F5E)' } : { width: 10, height: 10, background: '#475569' }} />
             ))}
-            <button onClick={() => setTIdx(i => (i + 1) % pages)} className="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-all">
-              <ChevronRight className="w-4 h-4 text-slate-700" />
+            <button onClick={() => setTIdx(i => (i + 1) % pages)} className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center hover:bg-white/15 transition-all">
+              <ChevronRight className="w-4 h-4 text-white" />
             </button>
           </div>
         </div>

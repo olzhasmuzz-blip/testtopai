@@ -14,7 +14,8 @@ const STEPS_RU = [
     num: '01',
     title: 'Проходишь бесплатную диагностику',
     desc: 'За 5 минут AI анализирует твой уровень по всем 4 навыкам и находит конкретные слабые зоны.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.25.jpeg',
+    image: '/how-it-works/step-01-diagnostic.png',
+    imageAlt: 'Быстрая диагностика уровня на телефоне рядом с заметками и датой экзамена',
     tag: 'Старт',
     tagColor: 'bg-orange-100 text-orange-700',
     accent: '#F97316',
@@ -24,7 +25,8 @@ const STEPS_RU = [
     num: '02',
     title: 'Тренируешься по персональному плану',
     desc: 'Reading, Listening, Writing и Speaking — реальные задания экзамена с мгновенной проверкой ответов.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.28.jpeg',
+    image: '/how-it-works/step-02-plan.png',
+    imageAlt: 'Персональный учебный план из карточек навыков и расписания в мобильном приложении',
     tag: 'Практика',
     tagColor: 'bg-rose-100 text-rose-700',
     accent: '#F43F5E',
@@ -34,7 +36,8 @@ const STEPS_RU = [
     num: '03',
     title: 'Получаешь мгновенный AI-фидбек',
     desc: 'Каждый ответ разбирается по критериям: зелёный — верно, красный — ошибка с объяснением.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.34.jpeg',
+    image: '/how-it-works/step-03-feedback.png',
+    imageAlt: 'Разбор письменного ответа с подсветкой ошибок и рекомендациями AI на телефоне',
     tag: 'Фидбек',
     tagColor: 'bg-amber-100 text-amber-700',
     accent: '#FBBF24',
@@ -44,7 +47,8 @@ const STEPS_RU = [
     num: '04',
     title: 'Растёшь — балл увеличивается',
     desc: 'Система отслеживает прогресс, усложняет задания и ведёт тебя к целевому баллу шаг за шагом.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.42.jpeg',
+    image: '/how-it-works/step-04-growth.png',
+    imageAlt: 'Рост результата на графике подготовки с финальной целевой отметкой',
     tag: 'Результат',
     tagColor: 'bg-emerald-100 text-emerald-700',
     accent: '#10B981',
@@ -57,7 +61,8 @@ const STEPS_EN = [
     num: '01',
     title: 'Take your free AI diagnostic',
     desc: 'In 5 minutes, AI evaluates all 4 skills and pinpoints exactly where you lose points.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.25.jpeg',
+    image: '/how-it-works/step-01-diagnostic.png',
+    imageAlt: 'Quick mobile diagnostic beside exam notes and a marked exam date',
     tag: 'Start',
     tagColor: 'bg-orange-100 text-orange-700',
     accent: '#F97316',
@@ -67,7 +72,8 @@ const STEPS_EN = [
     num: '02',
     title: 'Practice with your personal plan',
     desc: 'Reading, Listening, Writing & Speaking — authentic exam tasks with instant answer checking.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.28.jpeg',
+    image: '/how-it-works/step-02-plan.png',
+    imageAlt: 'Personal study plan cards arranged beside a mobile learning schedule',
     tag: 'Practice',
     tagColor: 'bg-rose-100 text-rose-700',
     accent: '#F43F5E',
@@ -77,7 +83,8 @@ const STEPS_EN = [
     num: '03',
     title: 'Get instant AI feedback',
     desc: 'Every answer is graded by criteria — green for correct, red for wrong with a clear explanation.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.34.jpeg',
+    image: '/how-it-works/step-03-feedback.png',
+    imageAlt: 'Written answer review with AI feedback highlights on a phone',
     tag: 'Feedback',
     tagColor: 'bg-amber-100 text-amber-700',
     accent: '#FBBF24',
@@ -87,7 +94,8 @@ const STEPS_EN = [
     num: '04',
     title: 'Watch your score climb',
     desc: 'The system tracks progress, auto-adjusts difficulty and guides you toward your target band step by step.',
-    screenshot: '/screens/WhatsApp Image 2026-08-21 at 10.59.42.jpeg',
+    image: '/how-it-works/step-04-growth.png',
+    imageAlt: 'Exam score growth chart with a marker placed on the target point',
     tag: 'Result',
     tagColor: 'bg-emerald-100 text-emerald-700',
     accent: '#10B981',
@@ -279,14 +287,14 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ lang, onOp
                   </div>
                 </div>
 
-                {/* screenshot area */}
+                {/* image area */}
                 <div className="relative h-[380px] sm:h-[460px] bg-slate-100 overflow-hidden">
                   {steps.map((s, i) => (
                     <img
                       key={i}
-                      src={s.screenshot}
-                      alt={s.tag}
-                      className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 bg-white
+                      src={s.image}
+                      alt={s.imageAlt}
+                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 bg-white
                         ${i === activeStep ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.03]'}`}
                     />
                   ))}

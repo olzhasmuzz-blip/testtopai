@@ -12,7 +12,13 @@ const STEP_ICONS: Record<number, React.ReactNode> = {
 
 // brand-aligned step colors
 const STEP_COLORS = ['#F97316', '#F43F5E', '#EC4899', '#FBBF24'];
-const LOOP_VISUAL = '/illustrations/solution-loop.svg';
+
+const METRIC_LABELS = {
+  latency: 'Скорость',
+  precision: 'Точность',
+  criteria: 'Критерии',
+  feedback: 'Фидбек',
+};
 
 export const SolutionSection: React.FC<SolutionSectionProps> = ({ lang }) => {
   const t = translations[lang];
@@ -106,26 +112,21 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ lang }) => {
           </div>
 
           {/* Active step hero */}
-          <div className="rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-2xl">
+          <div className="rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl">
             <div className="grid grid-cols-1 lg:grid-cols-12">
-              <div className="lg:col-span-5 relative min-h-[320px] overflow-hidden bg-[#FFF7F1] flex items-center justify-center p-6">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.16),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(244,63,94,0.08),transparent_35%)]" />
-                <img
-                  key={step.stepNumber}
-                  src={LOOP_VISUAL}
-                  alt={lang === 'ru' ? 'Замкнутый цикл обучения' : 'Closed loop learning'}
-                  className="relative z-10 w-full h-full max-h-[360px] object-contain drop-shadow-2xl"
-                  style={{ animation: 'slide-up .45s cubic-bezier(.16,1,.3,1)' }}
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute bottom-4 left-4 z-20">
+              <div className="lg:col-span-5 relative min-h-72 lg:min-h-[460px] overflow-hidden bg-[radial-gradient(circle_at_30%_20%,rgba(249,115,22,0.24),transparent_34%),radial-gradient(circle_at_72%_70%,rgba(16,185,129,0.18),transparent_32%),linear-gradient(135deg,#111827_0%,#020617_100%)]">
+                <div className="absolute inset-0 opacity-40"
+                  style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px)', backgroundSize: '36px 36px' }} />
+                <img key={step.stepNumber} src={step.photo} alt={step.title}
+                  className="absolute inset-0 m-auto w-[88%] h-[88%] object-contain drop-shadow-[0_30px_55px_rgba(0,0,0,0.45)] transition-transform duration-700"
+                  style={{ animation: 'slide-up .45s cubic-bezier(.16,1,.3,1)' }} />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-900/60 hidden lg:block" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent lg:hidden" />
+                <div className="absolute bottom-4 left-4">
                   <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold text-white"
-                    style={{ backgroundColor: STEP_COLORS[step.stepNumber - 1] + 'EE' }}>
-                    {lang === 'ru' ? 'ШАГ' : 'STEP'} {step.stepNumber}: {step.tag}
+                    style={{ backgroundColor: STEP_COLORS[step.stepNumber - 1] + 'CC' }}>
+                    ШАГ {step.stepNumber}: {step.tag}
                   </span>
-                </div>
-                <div className="absolute top-4 right-4 z-20 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur border border-orange-100 text-xs font-bold text-slate-700 shadow-sm">
-                  {lang === 'ru' ? 'Живой цикл' : 'Live loop'}
                 </div>
               </div>
               <div className="lg:col-span-7 p-7 sm:p-10 text-white flex flex-col justify-between">
@@ -134,13 +135,13 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ lang }) => {
                     <div className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
                       <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
-                        {lang === 'ru' ? 'Замкнутый AI-цикл' : lang === 'kz' ? 'Тұйық AI-цикл' : 'Closed-Loop AI Cycle'}
+                        Замкнутый AI-процесс
                       </span>
                     </div>
                     <button onClick={() => setPlaying(!playing)}
                       className="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-mono font-bold text-slate-300 flex items-center gap-1.5 hover:bg-slate-700 transition-all cursor-pointer">
                       {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                      {playing ? 'Auto ON' : 'Paused'}
+                      {playing ? 'Авто' : 'Пауза'}
                     </button>
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-black font-display mb-2" key={`title-${step.stepNumber}`}
@@ -149,10 +150,10 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ lang }) => {
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
                   {[
-                    { label: 'Latency', val: step.latency ?? 'Instant', color: 'text-emerald-400' },
-                    { label: 'Precision', val: '98.8%', color: 'text-orange-400' },
-                    { label: 'Criteria', val: '4/4 Cambridge', color: 'text-slate-200' },
-                    { label: 'Feedback', val: 'Word-level', color: 'text-amber-400' },
+                    { label: METRIC_LABELS.latency, val: step.latency ?? 'Мгновенно', color: 'text-emerald-400' },
+                    { label: METRIC_LABELS.precision, val: '98.8%', color: 'text-orange-400' },
+                    { label: METRIC_LABELS.criteria, val: '4/4 IELTS', color: 'text-slate-200' },
+                    { label: METRIC_LABELS.feedback, val: 'По словам', color: 'text-amber-400' },
                   ].map(({ label, val, color }) => (
                     <div key={label} className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/80">
                       <span className="text-[10px] text-slate-400 font-mono block">{label}</span>
