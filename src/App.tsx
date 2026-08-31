@@ -8,7 +8,7 @@ import { HowItWorksSection } from './components/HowItWorksSection';
 import { SolutionSection } from './components/SolutionSection';
 import { ModulesSection } from './components/ModulesSection';
 import { PositioningSection } from './components/PositioningSection';
-import { TractionSection } from './components/TractionSection';
+import { PortedProgressSections } from './components/PortedProgressSections';
 import { PricingSection } from './components/PricingSection';
 import { RoadmapVisionSection } from './components/RoadmapVisionSection';
 import { Footer } from './components/Footer';
@@ -77,8 +77,11 @@ export default function App() {
         {/* Section 7: Competitive Positioning & Category Creation */}
         <PositioningSection lang={lang} />
 
-        {/* Section 8: Traction, Live Metrics & Student Outcomes */}
-        <TractionSection lang={lang} />
+        {/* Section 8: Student stories and progress, ported from the redesign */}
+        <PortedProgressSections
+          lang={lang}
+          onOpenTestModal={() => setIsTestModalOpen(true)}
+        />
 
         {/* Section 9: Business Model, Subscriptions & Micro-Purchases */}
         <PricingSection
@@ -109,3 +112,4 @@ export default function App() {
     </div>
   );
 }
+
